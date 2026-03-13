@@ -1,0 +1,302 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aws": "https://aws.amazon.com/ns/",
+    "redshift": "https://aws.amazon.com/ns/redshift/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Cluster": {
+      "@id": "redshift:Cluster",
+      "@context": {
+        "clusterIdentifier": {
+          "@id": "redshift:clusterIdentifier",
+          "@type": "xsd:string"
+        },
+        "clusterStatus": {
+          "@id": "redshift:clusterStatus",
+          "@type": "xsd:string"
+        },
+        "nodeType": {
+          "@id": "redshift:nodeType",
+          "@type": "xsd:string"
+        },
+        "numberOfNodes": {
+          "@id": "redshift:numberOfNodes",
+          "@type": "xsd:integer"
+        },
+        "dbName": {
+          "@id": "redshift:dbName",
+          "@type": "xsd:string"
+        },
+        "masterUsername": {
+          "@id": "redshift:masterUsername",
+          "@type": "xsd:string"
+        },
+        "endpoint": {
+          "@id": "redshift:endpoint",
+          "@type": "@id"
+        },
+        "clusterCreateTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "vpcId": {
+          "@id": "redshift:vpcId",
+          "@type": "xsd:string"
+        },
+        "availabilityZone": {
+          "@id": "redshift:availabilityZone",
+          "@type": "xsd:string"
+        },
+        "encrypted": {
+          "@id": "redshift:encrypted",
+          "@type": "xsd:boolean"
+        },
+        "kmsKeyId": {
+          "@id": "redshift:kmsKeyId",
+          "@type": "xsd:string"
+        },
+        "publiclyAccessible": {
+          "@id": "redshift:publiclyAccessible",
+          "@type": "xsd:boolean"
+        },
+        "enhancedVpcRouting": {
+          "@id": "redshift:enhancedVpcRouting",
+          "@type": "xsd:boolean"
+        },
+        "clusterVersion": {
+          "@id": "schema:softwareVersion",
+          "@type": "xsd:string"
+        },
+        "clusterNamespaceArn": {
+          "@id": "aws:arn",
+          "@type": "@id"
+        },
+        "tags": {
+          "@id": "schema:keywords",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Endpoint": {
+      "@id": "redshift:Endpoint",
+      "@context": {
+        "address": {
+          "@id": "redshift:endpointAddress",
+          "@type": "xsd:string"
+        },
+        "port": {
+          "@id": "redshift:endpointPort",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Workgroup": {
+      "@id": "redshift:Workgroup",
+      "@context": {
+        "workgroupName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "workgroupArn": {
+          "@id": "aws:arn",
+          "@type": "@id"
+        },
+        "namespaceName": {
+          "@id": "redshift:namespaceName",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "redshift:workgroupStatus",
+          "@type": "xsd:string"
+        },
+        "baseCapacity": {
+          "@id": "redshift:baseCapacity",
+          "@type": "xsd:integer"
+        },
+        "maxCapacity": {
+          "@id": "redshift:maxCapacity",
+          "@type": "xsd:integer"
+        },
+        "endpoint": {
+          "@id": "redshift:endpoint",
+          "@type": "@id"
+        },
+        "publiclyAccessible": {
+          "@id": "redshift:publiclyAccessible",
+          "@type": "xsd:boolean"
+        },
+        "enhancedVpcRouting": {
+          "@id": "redshift:enhancedVpcRouting",
+          "@type": "xsd:boolean"
+        },
+        "creationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Namespace": {
+      "@id": "redshift:Namespace",
+      "@context": {
+        "namespaceName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "namespaceArn": {
+          "@id": "aws:arn",
+          "@type": "@id"
+        },
+        "namespaceId": {
+          "@id": "redshift:namespaceId",
+          "@type": "xsd:string"
+        },
+        "dbName": {
+          "@id": "redshift:dbName",
+          "@type": "xsd:string"
+        },
+        "adminUsername": {
+          "@id": "redshift:adminUsername",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "redshift:namespaceStatus",
+          "@type": "xsd:string"
+        },
+        "kmsKeyId": {
+          "@id": "redshift:kmsKeyId",
+          "@type": "xsd:string"
+        },
+        "creationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "iamRoles": {
+          "@id": "redshift:iamRoles",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Snapshot": {
+      "@id": "redshift:Snapshot",
+      "@context": {
+        "snapshotIdentifier": {
+          "@id": "redshift:snapshotIdentifier",
+          "@type": "xsd:string"
+        },
+        "clusterIdentifier": {
+          "@id": "redshift:clusterIdentifier",
+          "@type": "xsd:string"
+        },
+        "snapshotCreateTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "status": {
+          "@id": "redshift:snapshotStatus",
+          "@type": "xsd:string"
+        },
+        "snapshotType": {
+          "@id": "redshift:snapshotType",
+          "@type": "xsd:string"
+        },
+        "nodeType": {
+          "@id": "redshift:nodeType",
+          "@type": "xsd:string"
+        },
+        "numberOfNodes": {
+          "@id": "redshift:numberOfNodes",
+          "@type": "xsd:integer"
+        },
+        "dbName": {
+          "@id": "redshift:dbName",
+          "@type": "xsd:string"
+        },
+        "masterUsername": {
+          "@id": "redshift:masterUsername",
+          "@type": "xsd:string"
+        },
+        "encrypted": {
+          "@id": "redshift:encrypted",
+          "@type": "xsd:boolean"
+        },
+        "totalBackupSizeInMegaBytes": {
+          "@id": "redshift:totalBackupSizeInMegaBytes",
+          "@type": "xsd:double"
+        },
+        "currentBackupRateInMegaBytesPerSecond": {
+          "@id": "redshift:currentBackupRateInMegaBytesPerSecond",
+          "@type": "xsd:double"
+        }
+      }
+    },
+
+    "StatementExecution": {
+      "@id": "redshift:StatementExecution",
+      "@context": {
+        "statementId": {
+          "@id": "redshift:statementId",
+          "@type": "xsd:string"
+        },
+        "statementName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "redshift:statementStatus",
+          "@type": "xsd:string"
+        },
+        "queryString": {
+          "@id": "redshift:queryString",
+          "@type": "xsd:string"
+        },
+        "database": {
+          "@id": "redshift:database",
+          "@type": "xsd:string"
+        },
+        "clusterIdentifier": {
+          "@id": "redshift:clusterIdentifier",
+          "@type": "xsd:string"
+        },
+        "workgroupName": {
+          "@id": "redshift:workgroupName",
+          "@type": "xsd:string"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "duration": {
+          "@id": "redshift:durationNanoseconds",
+          "@type": "xsd:long"
+        },
+        "resultRows": {
+          "@id": "redshift:resultRows",
+          "@type": "xsd:long"
+        },
+        "resultSize": {
+          "@id": "redshift:resultSizeBytes",
+          "@type": "xsd:long"
+        },
+        "hasResultSet": {
+          "@id": "redshift:hasResultSet",
+          "@type": "xsd:boolean"
+        },
+        "error": {
+          "@id": "redshift:errorMessage",
+          "@type": "xsd:string"
+        }
+      }
+    }
+  }
+}

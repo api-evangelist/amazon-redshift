@@ -1,0 +1,1220 @@
+openapi: 3.1.0
+info:
+  title: Amazon Redshift Data API
+  description: >-
+    The Amazon Redshift Data API enables you to run SQL statements on Amazon
+    Redshift clusters and Amazon Redshift Serverless workgroups without managing
+    database connections or drivers. The Data API handles connection management,
+    authentication via IAM or Secrets Manager, and supports asynchronous
+    execution of SQL statements with result retrieval through a statement
+    identifier. Ideal for building serverless applications, integrating with
+    AWS Lambda, and running ad-hoc queries programmatically.
+  version: '2019-12-20'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/redshift/
+  termsOfService: https://aws.amazon.com/service-terms/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+externalDocs:
+  description: Amazon Redshift Data API Reference
+  url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
+servers:
+  - url: https://redshift-data.{region}.amazonaws.com
+    description: Amazon Redshift Data API regional endpoint
+    variables:
+      region:
+        default: us-east-1
+        description: AWS region identifier
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - eu-west-1
+          - eu-west-2
+          - eu-central-1
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-northeast-1
+          - ap-northeast-2
+          - ca-central-1
+          - sa-east-1
+tags:
+  - name: Statement Execution
+    description: Execute SQL statements against Amazon Redshift clusters or serverless workgroups
+  - name: Statement Management
+    description: Describe, list, and cancel SQL statement executions
+  - name: Result Retrieval
+    description: Retrieve results from completed SQL statement executions
+  - name: Metadata
+    description: List databases, schemas, and tables in a Redshift data warehouse
+security:
+  - sigv4Auth: []
+paths:
+  /ExecuteStatement:
+    post:
+      operationId: executeStatement
+      summary: Execute a SQL statement
+      description: >-
+        Runs a SQL statement against an Amazon Redshift cluster or Amazon
+        Redshift Serverless workgroup. The SQL statement runs asynchronously
+        and returns a statement identifier that you can use to check the
+        status with DescribeStatement and retrieve results with
+        GetStatementResult. The maximum query result size is 100 MB.
+      tags:
+        - Statement Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteStatementRequest'
+      responses:
+        '200':
+          description: Statement submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteStatementResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '503':
+          description: Service temporarily unavailable - the cluster is paused
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActiveStatementsExceededException'
+  /BatchExecuteStatement:
+    post:
+      operationId: batchExecuteStatement
+      summary: Execute multiple SQL statements in a batch
+      description: >-
+        Runs one or more SQL statements as a batch, which run as a single
+        transaction. The statements run serially in the order provided.
+        Returns a statement identifier for the batch that you can use with
+        DescribeStatement and GetStatementResult.
+      tags:
+        - Statement Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchExecuteStatementRequest'
+      responses:
+        '200':
+          description: Batch statement submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchExecuteStatementResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /DescribeStatement:
+    post:
+      operationId: describeStatement
+      summary: Describe a SQL statement execution
+      description: >-
+        Describes the details about a specific SQL statement run, including
+        the status, duration, result size, and error information. Use the
+        statement identifier returned by ExecuteStatement or
+        BatchExecuteStatement to identify the statement.
+      tags:
+        - Statement Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStatementRequest'
+      responses:
+        '200':
+          description: Statement details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStatementResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '404':
+          description: Statement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /ListStatements:
+    post:
+      operationId: listStatements
+      summary: List SQL statement executions
+      description: >-
+        Lists SQL statements that have been submitted. By default, only
+        finished statements are shown. You can filter by status and
+        optionally include statements submitted by all IAM users by setting
+        RoleLevel to true. Results are ordered by creation time, with the
+        most recent statements listed first.
+      tags:
+        - Statement Management
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStatementsRequest'
+      responses:
+        '200':
+          description: Statement list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStatementsResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /CancelStatement:
+    post:
+      operationId: cancelStatement
+      summary: Cancel a running SQL statement
+      description: >-
+        Cancels a running SQL statement. The statement must be in the
+        STARTED or SUBMITTED state to be cancelled.
+      tags:
+        - Statement Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelStatementRequest'
+      responses:
+        '200':
+          description: Statement cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelStatementResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '404':
+          description: Statement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /GetStatementResult:
+    post:
+      operationId: getStatementResult
+      summary: Get the results of a SQL statement
+      description: >-
+        Fetches the result of a SQL statement that was submitted with
+        ExecuteStatement or BatchExecuteStatement. The statement must have
+        completed successfully (status FINISHED). Results are paginated and
+        the maximum result size is 100 MB. Use the NextToken parameter to
+        retrieve subsequent pages.
+      tags:
+        - Result Retrieval
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetStatementResultRequest'
+      responses:
+        '200':
+          description: Statement results retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStatementResultResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '404':
+          description: Statement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /ListDatabases:
+    post:
+      operationId: listDatabases
+      summary: List databases in a cluster or workgroup
+      description: >-
+        Lists the databases in a cluster or workgroup. The databases are
+        retrieved from the system catalog. A token is returned to page
+        through the database list.
+      tags:
+        - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDatabasesRequest'
+      responses:
+        '200':
+          description: Database list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatabasesResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /ListSchemas:
+    post:
+      operationId: listSchemas
+      summary: List schemas in a database
+      description: >-
+        Lists the schemas in a database. A token is returned to page
+        through the schema list. You can filter the results by providing
+        a schema name pattern.
+      tags:
+        - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSchemasRequest'
+      responses:
+        '200':
+          description: Schema list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSchemasResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /ListTables:
+    post:
+      operationId: listTables
+      summary: List tables in a schema
+      description: >-
+        Lists the tables in a database. You can filter by schema or table
+        name pattern. A token is returned to page through the table list.
+      tags:
+        - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTablesRequest'
+      responses:
+        '200':
+          description: Table list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTablesResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /DescribeTable:
+    post:
+      operationId: describeTable
+      summary: Describe the columns of a table
+      description: >-
+        Describes the detailed information about a table and its columns.
+        Returns column names, data types, and other metadata for a
+        specified table.
+      tags:
+        - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTableRequest'
+      responses:
+        '200':
+          description: Table description retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTableResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+components:
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: >-
+        AWS Signature Version 4 authentication. Requests are signed using
+        IAM credentials. The Data API also supports authentication via
+        AWS Secrets Manager for database credentials or temporary IAM
+        credentials.
+  schemas:
+    ExecuteStatementRequest:
+      type: object
+      required:
+        - Database
+        - Sql
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: >-
+            The cluster identifier. Required when connecting to a
+            provisioned cluster. Mutually exclusive with WorkgroupName.
+          example: my-redshift-cluster
+        Database:
+          type: string
+          description: The name of the database to run the SQL statement against
+          example: dev
+        DbUser:
+          type: string
+          description: >-
+            The database user name. Required when authenticating with
+            temporary credentials from GetClusterCredentials.
+        SecretArn:
+          type: string
+          description: >-
+            The ARN of the secret stored in AWS Secrets Manager that
+            contains the database credentials. Mutually exclusive with
+            DbUser and temporary credentials.
+          example: arn:aws:secretsmanager:us-east-1:123456789012:secret:my-redshift-secret-AbCdEf
+        Sql:
+          type: string
+          description: The SQL statement to run. Maximum length is 100,000 characters.
+          maxLength: 100000
+          example: SELECT * FROM sales ORDER BY sale_date DESC LIMIT 10
+        StatementName:
+          type: string
+          description: >-
+            A name for the SQL statement. This name can be used to
+            identify the query in the ListStatements output.
+          example: my-sales-query
+        WithEvent:
+          type: boolean
+          description: >-
+            Whether to send an event to Amazon EventBridge when the
+            SQL statement completes. Default is false.
+          default: false
+        WorkgroupName:
+          type: string
+          description: >-
+            The serverless workgroup name. Required when connecting to
+            Redshift Serverless. Mutually exclusive with ClusterIdentifier.
+          example: my-workgroup
+        Parameters:
+          type: array
+          description: >-
+            Named parameters for the SQL statement. Use :name syntax
+            in the SQL string to reference parameters.
+          items:
+            $ref: '#/components/schemas/SqlParameter'
+        ClientToken:
+          type: string
+          description: >-
+            A unique, case-sensitive identifier to ensure idempotency
+            of the request.
+    BatchExecuteStatementRequest:
+      type: object
+      required:
+        - Database
+        - Sqls
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier for a provisioned cluster
+        Database:
+          type: string
+          description: The name of the database
+        DbUser:
+          type: string
+          description: The database user name for temporary credentials
+        SecretArn:
+          type: string
+          description: ARN of the secret in AWS Secrets Manager
+        Sqls:
+          type: array
+          description: >-
+            One or more SQL statements to run. The statements run
+            serially as a single transaction. Maximum 40 statements.
+          items:
+            type: string
+          minItems: 1
+          maxItems: 40
+        StatementName:
+          type: string
+          description: A name for the batch SQL statement
+        WithEvent:
+          type: boolean
+          description: Whether to send an event to EventBridge on completion
+          default: false
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        ClientToken:
+          type: string
+          description: Idempotency token
+    DescribeStatementRequest:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: >-
+            The identifier of the SQL statement to describe. This value
+            is returned by ExecuteStatement or BatchExecuteStatement.
+          example: c016234e-5c6c-4bc5-bb66-2c776b0e92db
+    ListStatementsRequest:
+      type: object
+      properties:
+        MaxResults:
+          type: integer
+          description: >-
+            The maximum number of SQL statements to return in the
+            response. Valid range is 0 to 100. Default is 100.
+          minimum: 0
+          maximum: 100
+          default: 100
+        NextToken:
+          type: string
+          description: >-
+            A value that indicates the starting point for the next set
+            of response records in a subsequent request.
+        RoleLevel:
+          type: boolean
+          description: >-
+            When true, returns statements submitted by all IAM users
+            in the account. Default is false, which returns only
+            statements from the calling user.
+          default: false
+        StatementName:
+          type: string
+          description: Filter results by a specific statement name
+        Status:
+          type: string
+          description: Filter results by statement status
+          enum:
+            - SUBMITTED
+            - PICKED
+            - STARTED
+            - FINISHED
+            - ABORTED
+            - FAILED
+            - ALL
+    CancelStatementRequest:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement to cancel
+    GetStatementResultRequest:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement whose results to fetch
+        NextToken:
+          type: string
+          description: A pagination token for the next page of results
+    ListDatabasesRequest:
+      type: object
+      required:
+        - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+        Database:
+          type: string
+          description: >-
+            The name of the database to use for connection. For
+            provisioned clusters this is typically 'dev'.
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        MaxResults:
+          type: integer
+          description: Maximum number of databases to return
+          minimum: 0
+          maximum: 1000
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+    ListSchemasRequest:
+      type: object
+      required:
+        - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+        Database:
+          type: string
+          description: The name of the database containing the schemas
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        SchemaPattern:
+          type: string
+          description: >-
+            A pattern to filter schemas. Uses SQL LIKE syntax where
+            underscore matches one character and percent matches zero
+            or more characters.
+          example: public%
+        MaxResults:
+          type: integer
+          description: Maximum number of schemas to return
+          minimum: 0
+          maximum: 1000
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+    ListTablesRequest:
+      type: object
+      required:
+        - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+        Database:
+          type: string
+          description: The name of the database containing the tables
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        SchemaPattern:
+          type: string
+          description: A schema name pattern to filter tables
+        TablePattern:
+          type: string
+          description: A table name pattern to filter tables
+          example: sales%
+        MaxResults:
+          type: integer
+          description: Maximum number of tables to return
+          minimum: 0
+          maximum: 1000
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+    DescribeTableRequest:
+      type: object
+      required:
+        - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+        Database:
+          type: string
+          description: The name of the database
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        Table:
+          type: string
+          description: >-
+            The table name. Can be qualified with schema name as
+            schema_name.table_name.
+          example: public.sales
+        Schema:
+          type: string
+          description: The schema that contains the table. Default is public.
+          default: public
+        MaxResults:
+          type: integer
+          description: Maximum number of columns to return
+          minimum: 0
+          maximum: 1000
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+    ExecuteStatementResponse:
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was created
+        Database:
+          type: string
+          description: The name of the database
+        DbUser:
+          type: string
+          description: The database user
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        SecretArn:
+          type: string
+          description: The secret ARN used for authentication
+    BatchExecuteStatementResponse:
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the batch SQL statement
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the batch statement was created
+        Database:
+          type: string
+          description: The name of the database
+        DbUser:
+          type: string
+          description: The database user
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        SecretArn:
+          type: string
+          description: The secret ARN used for authentication
+    DescribeStatementResponse:
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement
+        Status:
+          type: string
+          description: The status of the SQL statement
+          enum:
+            - SUBMITTED
+            - PICKED
+            - STARTED
+            - FINISHED
+            - ABORTED
+            - FAILED
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was created
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was last updated
+        Duration:
+          type: integer
+          format: int64
+          description: The time in nanoseconds the statement ran
+        QueryString:
+          type: string
+          description: The SQL statement that was executed
+        QueryParameters:
+          type: array
+          description: The parameters for the SQL statement
+          items:
+            $ref: '#/components/schemas/SqlParameter'
+        Database:
+          type: string
+          description: The name of the database
+        DbUser:
+          type: string
+          description: The database user
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        SecretArn:
+          type: string
+          description: The secret ARN
+        RedshiftPid:
+          type: integer
+          format: int64
+          description: The process identifier from the Redshift cluster
+        RedshiftQueryId:
+          type: integer
+          format: int64
+          description: The Redshift query identifier
+        ResultRows:
+          type: integer
+          format: int64
+          description: Total number of rows in the result set (FINISHED only)
+        ResultSize:
+          type: integer
+          format: int64
+          description: The size of the result set in bytes
+        HasResultSet:
+          type: boolean
+          description: Whether the statement has a result set
+        Error:
+          type: string
+          description: The error message if the statement failed
+        SubStatements:
+          type: array
+          description: >-
+            List of sub-statements for a batch execution. Only
+            present for BatchExecuteStatement calls.
+          items:
+            $ref: '#/components/schemas/SubStatementData'
+    ListStatementsResponse:
+      type: object
+      required:
+        - Statements
+      properties:
+        Statements:
+          type: array
+          description: List of SQL statements
+          items:
+            $ref: '#/components/schemas/StatementData'
+        NextToken:
+          type: string
+          description: >-
+            A pagination token to retrieve the next set of results.
+            Null if there are no more results.
+    CancelStatementResponse:
+      type: object
+      properties:
+        Status:
+          type: boolean
+          description: Whether the cancel request was successful
+    GetStatementResultResponse:
+      type: object
+      required:
+        - Records
+      properties:
+        Records:
+          type: array
+          description: The results of the SQL statement as an array of rows
+          items:
+            type: array
+            description: A single row of results
+            items:
+              $ref: '#/components/schemas/Field'
+        ColumnMetadata:
+          type: array
+          description: Metadata about the columns in the result set
+          items:
+            $ref: '#/components/schemas/ColumnMetadata'
+        TotalNumRows:
+          type: integer
+          format: int64
+          description: Total number of rows in the result set
+        NextToken:
+          type: string
+          description: Pagination token for the next page of results
+    ListDatabasesResponse:
+      type: object
+      properties:
+        Databases:
+          type: array
+          description: List of database names
+          items:
+            type: string
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+    ListSchemasResponse:
+      type: object
+      properties:
+        Schemas:
+          type: array
+          description: List of schema names
+          items:
+            type: string
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+    ListTablesResponse:
+      type: object
+      properties:
+        Tables:
+          type: array
+          description: List of tables
+          items:
+            $ref: '#/components/schemas/TableMember'
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+    DescribeTableResponse:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: The name of the table
+        ColumnList:
+          type: array
+          description: List of column definitions for the table
+          items:
+            $ref: '#/components/schemas/ColumnMetadata'
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+    SqlParameter:
+      type: object
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          description: The name of the parameter (without the colon prefix)
+          example: sale_date
+        value:
+          type: string
+          description: The value of the parameter
+          example: '2025-01-01'
+    StatementData:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement
+        StatementName:
+          type: string
+          description: The name of the SQL statement
+        Status:
+          type: string
+          description: The status of the SQL statement
+          enum:
+            - SUBMITTED
+            - PICKED
+            - STARTED
+            - FINISHED
+            - ABORTED
+            - FAILED
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was created
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was last updated
+        QueryString:
+          type: string
+          description: The SQL statement text
+        QueryParameters:
+          type: array
+          description: The query parameters
+          items:
+            $ref: '#/components/schemas/SqlParameter'
+        Database:
+          type: string
+          description: The name of the database
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+        SecretArn:
+          type: string
+          description: The secret ARN
+        IsBatchStatement:
+          type: boolean
+          description: Whether this is a batch statement
+    SubStatementData:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          type: string
+          description: The identifier of the sub-statement
+        Status:
+          type: string
+          description: The status of the sub-statement
+          enum:
+            - SUBMITTED
+            - PICKED
+            - STARTED
+            - FINISHED
+            - ABORTED
+            - FAILED
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the sub-statement was created
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: The date and time the sub-statement was last updated
+        Duration:
+          type: integer
+          format: int64
+          description: The time in nanoseconds the sub-statement ran
+        QueryString:
+          type: string
+          description: The SQL statement text
+        RedshiftQueryId:
+          type: integer
+          format: int64
+          description: The Redshift query identifier
+        ResultRows:
+          type: integer
+          format: int64
+          description: Total number of rows in the result set
+        ResultSize:
+          type: integer
+          format: int64
+          description: The size of the result set in bytes
+        HasResultSet:
+          type: boolean
+          description: Whether the sub-statement has a result set
+        Error:
+          type: string
+          description: The error message if the sub-statement failed
+    ColumnMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the column
+        label:
+          type: string
+          description: The label of the column (display name)
+        typeName:
+          type: string
+          description: >-
+            The database-specific data type name of the column
+          example: varchar
+        columnDefault:
+          type: string
+          description: The default value for the column
+        isCaseSensitive:
+          type: boolean
+          description: Whether the column is case-sensitive
+        isCurrency:
+          type: boolean
+          description: Whether the column contains currency data
+        isSigned:
+          type: boolean
+          description: Whether the column values are signed numbers
+        nullable:
+          type: integer
+          description: >-
+            Indicates the nullability of the column. 0 = not nullable,
+            1 = nullable, 2 = unknown.
+          enum:
+            - 0
+            - 1
+            - 2
+        precision:
+          type: integer
+          description: The precision of the column for numeric types
+        scale:
+          type: integer
+          description: The scale of the column for numeric types
+        length:
+          type: integer
+          description: The length of the column for character types
+        schemaName:
+          type: string
+          description: The schema name that contains the table
+        tableName:
+          type: string
+          description: The name of the table that contains the column
+    Field:
+      type: object
+      description: >-
+        A single value in a result row. Exactly one of the typed
+        properties will be present, corresponding to the column data type.
+      properties:
+        blobValue:
+          type: string
+          format: byte
+          description: A value in binary format
+        booleanValue:
+          type: boolean
+          description: A boolean value
+        doubleValue:
+          type: number
+          format: double
+          description: A double-precision floating point value
+        isNull:
+          type: boolean
+          description: Whether the value is null
+        longValue:
+          type: integer
+          format: int64
+          description: A long integer value
+        stringValue:
+          type: string
+          description: A string value
+    TableMember:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the table
+        type:
+          type: string
+          description: The type of the table (TABLE, VIEW, etc.)
+        schema:
+          type: string
+          description: The schema that contains the table
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the validation error
+    InternalServerException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the internal server error
+    ResourceNotFoundException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the resource not found error
+        ResourceId:
+          type: string
+          description: The identifier of the resource that was not found
+    ActiveStatementsExceededException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: >-
+            A description indicating the maximum number of active
+            statements has been exceeded

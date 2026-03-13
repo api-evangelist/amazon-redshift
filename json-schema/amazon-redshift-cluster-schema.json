@@ -1,0 +1,406 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aws.amazon.com/schemas/redshift/cluster.json",
+  "title": "Amazon Redshift Cluster",
+  "description": "Schema for an Amazon Redshift provisioned cluster resource, representing a fully managed petabyte-scale data warehouse in the AWS cloud. Includes cluster configuration, networking, security, and operational metadata as described in the Amazon Redshift Management Guide.",
+  "type": "object",
+  "required": [
+    "ClusterIdentifier",
+    "NodeType",
+    "MasterUsername",
+    "DBName"
+  ],
+  "properties": {
+    "ClusterIdentifier": {
+      "type": "string",
+      "description": "The unique identifier of the cluster. Must be lowercase, begin with a letter, contain only alphanumeric characters and hyphens, and be between 1 and 63 characters.",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "minLength": 1,
+      "maxLength": 63,
+      "examples": ["my-redshift-cluster"]
+    },
+    "ClusterStatus": {
+      "type": "string",
+      "description": "The current state of the cluster",
+      "enum": [
+        "available",
+        "creating",
+        "deleting",
+        "final-snapshot",
+        "hardware-failure",
+        "incompatible-hsm",
+        "incompatible-network",
+        "incompatible-parameters",
+        "incompatible-restore",
+        "modifying",
+        "paused",
+        "rebooting",
+        "renaming",
+        "resizing",
+        "rotating-keys",
+        "storage-full",
+        "updating-hsm"
+      ]
+    },
+    "ClusterAvailabilityStatus": {
+      "type": "string",
+      "description": "The availability status of the cluster for queries",
+      "enum": [
+        "Available",
+        "Unavailable",
+        "Maintenance",
+        "Modifying"
+      ]
+    },
+    "NodeType": {
+      "type": "string",
+      "description": "The node type for the nodes in the cluster",
+      "enum": [
+        "dc2.large",
+        "dc2.8xlarge",
+        "ra3.xlplus",
+        "ra3.4xlarge",
+        "ra3.16xlarge"
+      ]
+    },
+    "NumberOfNodes": {
+      "type": "integer",
+      "description": "The number of compute nodes in the cluster. For single-node clusters this is 1.",
+      "minimum": 1,
+      "maximum": 128,
+      "default": 1
+    },
+    "ClusterType": {
+      "type": "string",
+      "description": "The type of the cluster based on number of nodes",
+      "enum": [
+        "single-node",
+        "multi-node"
+      ]
+    },
+    "DBName": {
+      "type": "string",
+      "description": "The name of the initial database created when the cluster was provisioned. Default is 'dev'.",
+      "default": "dev",
+      "examples": ["dev", "mydb"]
+    },
+    "MasterUsername": {
+      "type": "string",
+      "description": "The admin user name for the cluster. Must be lowercase, begin with a letter, contain only alphanumeric characters, and be between 1 and 128 characters.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Endpoint": {
+      "$ref": "#/$defs/Endpoint"
+    },
+    "ClusterCreateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time that the cluster was created"
+    },
+    "AutomatedSnapshotRetentionPeriod": {
+      "type": "integer",
+      "description": "The number of days that automatic cluster snapshots are retained. Default is 1.",
+      "minimum": 0,
+      "maximum": 35,
+      "default": 1
+    },
+    "ManualSnapshotRetentionPeriod": {
+      "type": "integer",
+      "description": "The default number of days to retain a manual snapshot. -1 means indefinitely.",
+      "minimum": -1,
+      "maximum": 3653,
+      "default": -1
+    },
+    "ClusterSecurityGroups": {
+      "type": "array",
+      "description": "List of cluster security groups associated with the cluster",
+      "items": {
+        "$ref": "#/$defs/ClusterSecurityGroupMembership"
+      }
+    },
+    "VpcSecurityGroups": {
+      "type": "array",
+      "description": "List of VPC security groups associated with the cluster",
+      "items": {
+        "$ref": "#/$defs/VpcSecurityGroupMembership"
+      }
+    },
+    "ClusterParameterGroups": {
+      "type": "array",
+      "description": "List of cluster parameter groups associated with this cluster",
+      "items": {
+        "$ref": "#/$defs/ClusterParameterGroupStatus"
+      }
+    },
+    "ClusterSubnetGroupName": {
+      "type": "string",
+      "description": "The name of the subnet group associated with the cluster"
+    },
+    "VpcId": {
+      "type": "string",
+      "description": "The identifier of the VPC the cluster is in",
+      "pattern": "^vpc-[a-z0-9]+$",
+      "examples": ["vpc-0abc123def456"]
+    },
+    "AvailabilityZone": {
+      "type": "string",
+      "description": "The name of the Availability Zone in which the cluster is located",
+      "examples": ["us-east-1a"]
+    },
+    "PreferredMaintenanceWindow": {
+      "type": "string",
+      "description": "The weekly time range for system maintenance in UTC, formatted as ddd:hh24:mi-ddd:hh24:mi",
+      "examples": ["sun:05:00-sun:05:30"]
+    },
+    "ClusterVersion": {
+      "type": "string",
+      "description": "The version ID of the Amazon Redshift engine running on the cluster",
+      "examples": ["1.0"]
+    },
+    "AllowVersionUpgrade": {
+      "type": "boolean",
+      "description": "Whether major version upgrades are applied automatically during the maintenance window",
+      "default": true
+    },
+    "PubliclyAccessible": {
+      "type": "boolean",
+      "description": "Whether the cluster can be accessed from a public network",
+      "default": false
+    },
+    "Encrypted": {
+      "type": "boolean",
+      "description": "Whether data in the cluster is encrypted at rest",
+      "default": false
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The AWS KMS key ID used for encryption of data at rest",
+      "examples": ["arn:aws:kms:us-east-1:123456789012:key/abcd1234-ef56-gh78-ij90-klmn1234opqr"]
+    },
+    "EnhancedVpcRouting": {
+      "type": "boolean",
+      "description": "Whether enhanced VPC routing is enabled, forcing all COPY and UNLOAD traffic through the VPC",
+      "default": false
+    },
+    "IamRoles": {
+      "type": "array",
+      "description": "List of IAM roles associated with the cluster for authorization",
+      "items": {
+        "$ref": "#/$defs/ClusterIamRole"
+      }
+    },
+    "MaintenanceTrackName": {
+      "type": "string",
+      "description": "The name of the maintenance track for the cluster",
+      "enum": [
+        "current",
+        "trailing"
+      ],
+      "default": "current"
+    },
+    "ElasticResizeNumberOfNodeOptions": {
+      "type": "string",
+      "description": "The number of nodes that you can resize the cluster to using elastic resize"
+    },
+    "AquaConfiguration": {
+      "$ref": "#/$defs/AquaConfiguration"
+    },
+    "TotalStorageCapacityInMegaBytes": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The total storage capacity of the cluster in megabytes"
+    },
+    "ClusterNamespaceArn": {
+      "type": "string",
+      "description": "The namespace ARN of the cluster",
+      "examples": ["arn:aws:redshift:us-east-1:123456789012:namespace:abcd1234-ef56-gh78-ij90"]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags associated with the cluster",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      }
+    }
+  },
+  "$defs": {
+    "Endpoint": {
+      "type": "object",
+      "description": "Connection endpoint for the cluster",
+      "properties": {
+        "Address": {
+          "type": "string",
+          "description": "The DNS address of the cluster endpoint",
+          "examples": ["my-redshift-cluster.abc123xyz.us-east-1.redshift.amazonaws.com"]
+        },
+        "Port": {
+          "type": "integer",
+          "description": "The port that the database engine is listening on",
+          "default": 5439,
+          "examples": [5439]
+        },
+        "VpcEndpoints": {
+          "type": "array",
+          "description": "List of VPC endpoints for the cluster",
+          "items": {
+            "type": "object",
+            "properties": {
+              "VpcEndpointId": {
+                "type": "string",
+                "description": "The VPC endpoint identifier"
+              },
+              "VpcId": {
+                "type": "string",
+                "description": "The VPC identifier"
+              },
+              "NetworkInterfaces": {
+                "type": "array",
+                "description": "Network interfaces of the endpoint",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "NetworkInterfaceId": {
+                      "type": "string",
+                      "description": "The network interface identifier"
+                    },
+                    "SubnetId": {
+                      "type": "string",
+                      "description": "The subnet identifier"
+                    },
+                    "PrivateIpAddress": {
+                      "type": "string",
+                      "format": "ipv4",
+                      "description": "The private IP address of the interface"
+                    },
+                    "AvailabilityZone": {
+                      "type": "string",
+                      "description": "The Availability Zone"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ClusterSecurityGroupMembership": {
+      "type": "object",
+      "description": "Describes a cluster security group membership",
+      "properties": {
+        "ClusterSecurityGroupName": {
+          "type": "string",
+          "description": "The name of the cluster security group"
+        },
+        "Status": {
+          "type": "string",
+          "description": "The status of the cluster security group",
+          "enum": ["active", "adding", "removing"]
+        }
+      }
+    },
+    "VpcSecurityGroupMembership": {
+      "type": "object",
+      "description": "Describes a VPC security group membership",
+      "properties": {
+        "VpcSecurityGroupId": {
+          "type": "string",
+          "description": "The identifier of the VPC security group"
+        },
+        "Status": {
+          "type": "string",
+          "description": "The status of the VPC security group",
+          "enum": ["active", "adding", "removing"]
+        }
+      }
+    },
+    "ClusterParameterGroupStatus": {
+      "type": "object",
+      "description": "Describes the status of a cluster parameter group",
+      "properties": {
+        "ParameterGroupName": {
+          "type": "string",
+          "description": "The name of the cluster parameter group"
+        },
+        "ParameterApplyStatus": {
+          "type": "string",
+          "description": "The status of parameter updates",
+          "enum": ["in-sync", "pending-reboot"]
+        },
+        "ClusterParameterStatusList": {
+          "type": "array",
+          "description": "List of individual parameter statuses",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ParameterName": {
+                "type": "string",
+                "description": "The name of the parameter"
+              },
+              "ParameterApplyType": {
+                "type": "string",
+                "description": "The apply type of the parameter",
+                "enum": ["static", "dynamic"]
+              },
+              "ParameterApplyStatus": {
+                "type": "string",
+                "description": "The status of the parameter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ClusterIamRole": {
+      "type": "object",
+      "description": "An IAM role associated with the cluster",
+      "properties": {
+        "IamRoleArn": {
+          "type": "string",
+          "description": "The ARN of the IAM role",
+          "pattern": "^arn:aws:iam::\\d{12}:role/.+$",
+          "examples": ["arn:aws:iam::123456789012:role/RedshiftCopyRole"]
+        },
+        "ApplyStatus": {
+          "type": "string",
+          "description": "The status of the IAM role association",
+          "enum": ["in-sync", "adding", "removing"]
+        }
+      }
+    },
+    "AquaConfiguration": {
+      "type": "object",
+      "description": "AQUA (Advanced Query Accelerator) configuration for the cluster",
+      "properties": {
+        "AquaStatus": {
+          "type": "string",
+          "description": "The value represents how the cluster is configured for using AQUA",
+          "enum": ["enabled", "disabled", "applying"]
+        },
+        "AquaConfigurationStatus": {
+          "type": "string",
+          "description": "The user-configured AQUA setting",
+          "enum": ["enabled", "disabled", "auto"]
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag consisting of a key-value pair",
+      "required": ["Key"],
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag. Maximum 128 Unicode characters.",
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag. Maximum 256 Unicode characters.",
+          "maxLength": 256
+        }
+      }
+    }
+  }
+}
