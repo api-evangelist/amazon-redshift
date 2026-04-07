@@ -56,7 +56,7 @@ paths:
   /ExecuteStatement:
     post:
       operationId: executeStatement
-      summary: Execute a SQL statement
+      summary: Amazon Redshift Execute a SQL statement
       description: >-
         Runs a SQL statement against an Amazon Redshift cluster or Amazon
         Redshift Serverless workgroup. The SQL statement runs asynchronously
@@ -99,7 +99,7 @@ paths:
   /BatchExecuteStatement:
     post:
       operationId: batchExecuteStatement
-      summary: Execute multiple SQL statements in a batch
+      summary: Amazon Redshift Execute multiple SQL statements in a batch
       description: >-
         Runs one or more SQL statements as a batch, which run as a single
         transaction. The statements run serially in the order provided.
@@ -135,7 +135,7 @@ paths:
   /DescribeStatement:
     post:
       operationId: describeStatement
-      summary: Describe a SQL statement execution
+      summary: Amazon Redshift Describe a SQL statement execution
       description: >-
         Describes the details about a specific SQL statement run, including
         the status, duration, result size, and error information. Use the
@@ -177,7 +177,7 @@ paths:
   /ListStatements:
     post:
       operationId: listStatements
-      summary: List SQL statement executions
+      summary: Amazon Redshift List SQL statement executions
       description: >-
         Lists SQL statements that have been submitted. By default, only
         finished statements are shown. You can filter by status and
@@ -214,7 +214,7 @@ paths:
   /CancelStatement:
     post:
       operationId: cancelStatement
-      summary: Cancel a running SQL statement
+      summary: Amazon Redshift Cancel a running SQL statement
       description: >-
         Cancels a running SQL statement. The statement must be in the
         STARTED or SUBMITTED state to be cancelled.
@@ -254,7 +254,7 @@ paths:
   /GetStatementResult:
     post:
       operationId: getStatementResult
-      summary: Get the results of a SQL statement
+      summary: Amazon Redshift Get the results of a SQL statement
       description: >-
         Fetches the result of a SQL statement that was submitted with
         ExecuteStatement or BatchExecuteStatement. The statement must have
@@ -297,7 +297,7 @@ paths:
   /ListDatabases:
     post:
       operationId: listDatabases
-      summary: List databases in a cluster or workgroup
+      summary: Amazon Redshift List databases in a cluster or workgroup
       description: >-
         Lists the databases in a cluster or workgroup. The databases are
         retrieved from the system catalog. A token is returned to page
@@ -332,7 +332,7 @@ paths:
   /ListSchemas:
     post:
       operationId: listSchemas
-      summary: List schemas in a database
+      summary: Amazon Redshift List schemas in a database
       description: >-
         Lists the schemas in a database. A token is returned to page
         through the schema list. You can filter the results by providing
@@ -367,7 +367,7 @@ paths:
   /ListTables:
     post:
       operationId: listTables
-      summary: List tables in a schema
+      summary: Amazon Redshift List tables in a schema
       description: >-
         Lists the tables in a database. You can filter by schema or table
         name pattern. A token is returned to page through the table list.
@@ -401,7 +401,7 @@ paths:
   /DescribeTable:
     post:
       operationId: describeTable
-      summary: Describe the columns of a table
+      summary: Amazon Redshift Describe the columns of a table
       description: >-
         Describes the detailed information about a table and its columns.
         Returns column names, data types, and other metadata for a
