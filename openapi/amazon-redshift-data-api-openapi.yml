@@ -42,14 +42,14 @@ servers:
           - ca-central-1
           - sa-east-1
 tags:
+  - name: Metadata
+    description: List databases, schemas, and tables in a Redshift data warehouse
+  - name: Result Retrieval
+    description: Retrieve results from completed SQL statement executions
   - name: Statement Execution
     description: Execute SQL statements against Amazon Redshift clusters or serverless workgroups
   - name: Statement Management
     description: Describe, list, and cancel SQL statement executions
-  - name: Result Retrieval
-    description: Retrieve results from completed SQL statement executions
-  - name: Metadata
-    description: List databases, schemas, and tables in a Redshift data warehouse
 security:
   - sigv4Auth: []
 paths:
