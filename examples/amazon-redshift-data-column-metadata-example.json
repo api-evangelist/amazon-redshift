@@ -1,0 +1,15 @@
+{
+  "name": "Example Title",
+  "label": "Example Title",
+  "typeName": "example_value",
+  "columnDefault": "example_value",
+  "isCaseSensitive": true,
+  "isCurrency": true,
+  "isSigned": true,
+  "nullable": 10,
+  "precision": 10,
+  "scale": 10,
+  "length": 10,
+  "schemaName": "example_value",
+  "tableName": "example_value"
+}

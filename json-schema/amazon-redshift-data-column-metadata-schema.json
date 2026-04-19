@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ColumnMetadata",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the column"
+    },
+    "label": {
+      "type": "string",
+      "description": "The label of the column (display name)"
+    },
+    "typeName": {
+      "type": "string",
+      "description": "The database-specific data type name of the column"
+    },
+    "columnDefault": {
+      "type": "string",
+      "description": "The default value for the column"
+    },
+    "isCaseSensitive": {
+      "type": "boolean",
+      "description": "Whether the column is case-sensitive"
+    },
+    "isCurrency": {
+      "type": "boolean",
+      "description": "Whether the column contains currency data"
+    },
+    "isSigned": {
+      "type": "boolean",
+      "description": "Whether the column values are signed numbers"
+    },
+    "nullable": {
+      "type": "integer",
+      "description": "Indicates the nullability of the column. 0 = not nullable, 1 = nullable, 2 = unknown."
+    },
+    "precision": {
+      "type": "integer",
+      "description": "The precision of the column for numeric types"
+    },
+    "scale": {
+      "type": "integer",
+      "description": "The scale of the column for numeric types"
+    },
+    "length": {
+      "type": "integer",
+      "description": "The length of the column for character types"
+    },
+    "schemaName": {
+      "type": "string",
+      "description": "The schema name that contains the table"
+    },
+    "tableName": {
+      "type": "string",
+      "description": "The name of the table that contains the column"
+    }
+  }
+}

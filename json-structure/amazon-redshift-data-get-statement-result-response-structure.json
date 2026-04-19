@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GetStatementResultResponse",
+  "type": "object",
+  "properties": {
+    "Records": {
+      "type": "array"
+    },
+    "ColumnMetadata": {
+      "type": "array"
+    },
+    "TotalNumRows": {
+      "type": "integer"
+    },
+    "NextToken": {
+      "type": "string"
+    }
+  }
+}

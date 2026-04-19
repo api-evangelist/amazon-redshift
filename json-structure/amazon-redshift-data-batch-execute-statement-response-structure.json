@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BatchExecuteStatementResponse",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "Database": {
+      "type": "string"
+    },
+    "DbUser": {
+      "type": "string"
+    },
+    "ClusterIdentifier": {
+      "type": "string"
+    },
+    "WorkgroupName": {
+      "type": "string"
+    },
+    "SecretArn": {
+      "type": "string"
+    }
+  }
+}

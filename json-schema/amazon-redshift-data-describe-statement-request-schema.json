@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DescribeStatementRequest",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The identifier of the SQL statement to describe. This value is returned by ExecuteStatement or BatchExecuteStatement."
+    }
+  }
+}

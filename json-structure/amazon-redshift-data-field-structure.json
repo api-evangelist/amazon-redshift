@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Field",
+  "type": "object",
+  "properties": {
+    "blobValue": {
+      "type": "string"
+    },
+    "booleanValue": {
+      "type": "boolean"
+    },
+    "doubleValue": {
+      "type": "number"
+    },
+    "isNull": {
+      "type": "boolean"
+    },
+    "longValue": {
+      "type": "integer"
+    },
+    "stringValue": {
+      "type": "string"
+    }
+  }
+}

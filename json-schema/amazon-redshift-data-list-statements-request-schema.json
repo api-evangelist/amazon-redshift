@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListStatementsRequest",
+  "type": "object",
+  "properties": {
+    "MaxResults": {
+      "type": "integer",
+      "description": "The maximum number of SQL statements to return in the response. Valid range is 0 to 100. Default is 100."
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "A value that indicates the starting point for the next set of response records in a subsequent request."
+    },
+    "RoleLevel": {
+      "type": "boolean",
+      "description": "When true, returns statements submitted by all IAM users in the account. Default is false, which returns only statements from the calling user."
+    },
+    "StatementName": {
+      "type": "string",
+      "description": "Filter results by a specific statement name"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Filter results by statement status"
+    }
+  }
+}

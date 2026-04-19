@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ColumnMetadata",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "typeName": {
+      "type": "string"
+    },
+    "columnDefault": {
+      "type": "string"
+    },
+    "isCaseSensitive": {
+      "type": "boolean"
+    },
+    "isCurrency": {
+      "type": "boolean"
+    },
+    "isSigned": {
+      "type": "boolean"
+    },
+    "nullable": {
+      "type": "integer"
+    },
+    "precision": {
+      "type": "integer"
+    },
+    "scale": {
+      "type": "integer"
+    },
+    "length": {
+      "type": "integer"
+    },
+    "schemaName": {
+      "type": "string"
+    },
+    "tableName": {
+      "type": "string"
+    }
+  }
+}

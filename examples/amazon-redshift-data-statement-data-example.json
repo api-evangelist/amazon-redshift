@@ -1,0 +1,14 @@
+{
+  "Id": "abc123",
+  "StatementName": "example_value",
+  "Status": "example_value",
+  "CreatedAt": "example_value",
+  "UpdatedAt": "example_value",
+  "QueryString": "example_value",
+  "QueryParameters": [],
+  "Database": "example_value",
+  "ClusterIdentifier": "example_value",
+  "WorkgroupName": "example_value",
+  "SecretArn": "example_value",
+  "IsBatchStatement": true
+}

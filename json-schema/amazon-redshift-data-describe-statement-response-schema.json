@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DescribeStatementResponse",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The identifier of the SQL statement"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the SQL statement"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The date and time the statement was created"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The date and time the statement was last updated"
+    },
+    "Duration": {
+      "type": "integer",
+      "description": "The time in nanoseconds the statement ran"
+    },
+    "QueryString": {
+      "type": "string",
+      "description": "The SQL statement that was executed"
+    },
+    "QueryParameters": {
+      "type": "array",
+      "description": "The parameters for the SQL statement"
+    },
+    "Database": {
+      "type": "string",
+      "description": "The name of the database"
+    },
+    "DbUser": {
+      "type": "string",
+      "description": "The database user"
+    },
+    "ClusterIdentifier": {
+      "type": "string",
+      "description": "The cluster identifier"
+    },
+    "WorkgroupName": {
+      "type": "string",
+      "description": "The serverless workgroup name"
+    },
+    "SecretArn": {
+      "type": "string",
+      "description": "The secret ARN"
+    },
+    "RedshiftPid": {
+      "type": "integer",
+      "description": "The process identifier from the Redshift cluster"
+    },
+    "RedshiftQueryId": {
+      "type": "integer",
+      "description": "The Redshift query identifier"
+    },
+    "ResultRows": {
+      "type": "integer",
+      "description": "Total number of rows in the result set (FINISHED only)"
+    },
+    "ResultSize": {
+      "type": "integer",
+      "description": "The size of the result set in bytes"
+    },
+    "HasResultSet": {
+      "type": "boolean",
+      "description": "Whether the statement has a result set"
+    },
+    "Error": {
+      "type": "string",
+      "description": "The error message if the statement failed"
+    },
+    "SubStatements": {
+      "type": "array",
+      "description": "List of sub-statements for a batch execution. Only present for BatchExecuteStatement calls."
+    }
+  }
+}

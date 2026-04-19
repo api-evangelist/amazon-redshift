@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StatementData",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The identifier of the SQL statement"
+    },
+    "StatementName": {
+      "type": "string",
+      "description": "The name of the SQL statement"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the SQL statement"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The date and time the statement was created"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The date and time the statement was last updated"
+    },
+    "QueryString": {
+      "type": "string",
+      "description": "The SQL statement text"
+    },
+    "QueryParameters": {
+      "type": "array",
+      "description": "The query parameters"
+    },
+    "Database": {
+      "type": "string",
+      "description": "The name of the database"
+    },
+    "ClusterIdentifier": {
+      "type": "string",
+      "description": "The cluster identifier"
+    },
+    "WorkgroupName": {
+      "type": "string",
+      "description": "The serverless workgroup name"
+    },
+    "SecretArn": {
+      "type": "string",
+      "description": "The secret ARN"
+    },
+    "IsBatchStatement": {
+      "type": "boolean",
+      "description": "Whether this is a batch statement"
+    }
+  }
+}

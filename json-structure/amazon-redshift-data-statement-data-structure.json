@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "StatementData",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "StatementName": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "QueryString": {
+      "type": "string"
+    },
+    "QueryParameters": {
+      "type": "array"
+    },
+    "Database": {
+      "type": "string"
+    },
+    "ClusterIdentifier": {
+      "type": "string"
+    },
+    "WorkgroupName": {
+      "type": "string"
+    },
+    "SecretArn": {
+      "type": "string"
+    },
+    "IsBatchStatement": {
+      "type": "boolean"
+    }
+  }
+}

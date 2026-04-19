@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CancelStatementResponse",
+  "type": "object",
+  "properties": {
+    "Status": {
+      "type": "boolean",
+      "description": "Whether the cancel request was successful"
+    }
+  }
+}

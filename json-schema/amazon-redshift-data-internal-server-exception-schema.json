@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InternalServerException",
+  "type": "object",
+  "properties": {
+    "Message": {
+      "type": "string",
+      "description": "A description of the internal server error"
+    }
+  }
+}

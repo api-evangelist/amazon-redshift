@@ -1,0 +1,8 @@
+{
+  "blobValue": "example_value",
+  "booleanValue": true,
+  "doubleValue": 42.5,
+  "isNull": true,
+  "longValue": 10,
+  "stringValue": "example_value"
+}

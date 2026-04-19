@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListStatementsResponse",
+  "type": "object",
+  "properties": {
+    "Statements": {
+      "type": "array",
+      "description": "List of SQL statements"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "A pagination token to retrieve the next set of results. Null if there are no more results."
+    }
+  }
+}

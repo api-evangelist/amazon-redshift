@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchExecuteStatementRequest",
+  "type": "object",
+  "properties": {
+    "ClusterIdentifier": {
+      "type": "string",
+      "description": "The cluster identifier for a provisioned cluster"
+    },
+    "Database": {
+      "type": "string",
+      "description": "The name of the database"
+    },
+    "DbUser": {
+      "type": "string",
+      "description": "The database user name for temporary credentials"
+    },
+    "SecretArn": {
+      "type": "string",
+      "description": "ARN of the secret in AWS Secrets Manager"
+    },
+    "Sqls": {
+      "type": "array",
+      "description": "One or more SQL statements to run. The statements run serially as a single transaction. Maximum 40 statements."
+    },
+    "StatementName": {
+      "type": "string",
+      "description": "A name for the batch SQL statement"
+    },
+    "WithEvent": {
+      "type": "boolean",
+      "description": "Whether to send an event to EventBridge on completion"
+    },
+    "WorkgroupName": {
+      "type": "string",
+      "description": "The serverless workgroup name"
+    },
+    "ClientToken": {
+      "type": "string",
+      "description": "Idempotency token"
+    }
+  }
+}

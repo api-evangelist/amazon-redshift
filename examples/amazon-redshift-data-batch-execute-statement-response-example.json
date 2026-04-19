@@ -1,0 +1,9 @@
+{
+  "Id": "abc123",
+  "CreatedAt": "example_value",
+  "Database": "example_value",
+  "DbUser": "example_value",
+  "ClusterIdentifier": "example_value",
+  "WorkgroupName": "example_value",
+  "SecretArn": "example_value"
+}

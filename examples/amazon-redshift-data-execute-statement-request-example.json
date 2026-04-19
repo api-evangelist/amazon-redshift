@@ -1,0 +1,12 @@
+{
+  "ClusterIdentifier": "example_value",
+  "Database": "example_value",
+  "DbUser": "example_value",
+  "SecretArn": "example_value",
+  "Sql": "example_value",
+  "StatementName": "example_value",
+  "WithEvent": true,
+  "WorkgroupName": "example_value",
+  "Parameters": [],
+  "ClientToken": "example_value"
+}

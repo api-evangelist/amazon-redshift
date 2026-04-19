@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetStatementResultResponse",
+  "type": "object",
+  "properties": {
+    "Records": {
+      "type": "array",
+      "description": "The results of the SQL statement as an array of rows"
+    },
+    "ColumnMetadata": {
+      "type": "array",
+      "description": "Metadata about the columns in the result set"
+    },
+    "TotalNumRows": {
+      "type": "integer",
+      "description": "Total number of rows in the result set"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "Pagination token for the next page of results"
+    }
+  }
+}

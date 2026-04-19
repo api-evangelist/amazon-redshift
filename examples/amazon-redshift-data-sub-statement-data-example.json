@@ -1,0 +1,13 @@
+{
+  "Id": "abc123",
+  "Status": "example_value",
+  "CreatedAt": "example_value",
+  "UpdatedAt": "example_value",
+  "Duration": 10,
+  "QueryString": "example_value",
+  "RedshiftQueryId": "500123",
+  "ResultRows": 10,
+  "ResultSize": 10,
+  "HasResultSet": true,
+  "Error": "example_value"
+}

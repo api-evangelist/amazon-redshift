@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "DescribeTableResponse",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "ColumnList": {
+      "type": "array"
+    },
+    "NextToken": {
+      "type": "string"
+    }
+  }
+}

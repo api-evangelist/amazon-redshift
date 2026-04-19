@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListTablesRequest",
+  "type": "object",
+  "properties": {
+    "ClusterIdentifier": {
+      "type": "string",
+      "description": "The cluster identifier"
+    },
+    "Database": {
+      "type": "string",
+      "description": "The name of the database containing the tables"
+    },
+    "DbUser": {
+      "type": "string",
+      "description": "The database user for temporary credentials"
+    },
+    "SecretArn": {
+      "type": "string",
+      "description": "ARN of the secret in Secrets Manager"
+    },
+    "WorkgroupName": {
+      "type": "string",
+      "description": "The serverless workgroup name"
+    },
+    "SchemaPattern": {
+      "type": "string",
+      "description": "A schema name pattern to filter tables"
+    },
+    "TablePattern": {
+      "type": "string",
+      "description": "A table name pattern to filter tables"
+    },
+    "MaxResults": {
+      "type": "integer",
+      "description": "Maximum number of tables to return"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "Pagination token for the next page"
+    }
+  }
+}

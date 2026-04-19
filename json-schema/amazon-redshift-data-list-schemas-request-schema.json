@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListSchemasRequest",
+  "type": "object",
+  "properties": {
+    "ClusterIdentifier": {
+      "type": "string",
+      "description": "The cluster identifier"
+    },
+    "Database": {
+      "type": "string",
+      "description": "The name of the database containing the schemas"
+    },
+    "DbUser": {
+      "type": "string",
+      "description": "The database user for temporary credentials"
+    },
+    "SecretArn": {
+      "type": "string",
+      "description": "ARN of the secret in Secrets Manager"
+    },
+    "WorkgroupName": {
+      "type": "string",
+      "description": "The serverless workgroup name"
+    },
+    "SchemaPattern": {
+      "type": "string",
+      "description": "A pattern to filter schemas. Uses SQL LIKE syntax where underscore matches one character and percent matches zero or more characters."
+    },
+    "MaxResults": {
+      "type": "integer",
+      "description": "Maximum number of schemas to return"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "Pagination token for the next page"
+    }
+  }
+}

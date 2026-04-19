@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SubStatementData",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "Duration": {
+      "type": "integer"
+    },
+    "QueryString": {
+      "type": "string"
+    },
+    "RedshiftQueryId": {
+      "type": "integer"
+    },
+    "ResultRows": {
+      "type": "integer"
+    },
+    "ResultSize": {
+      "type": "integer"
+    },
+    "HasResultSet": {
+      "type": "boolean"
+    },
+    "Error": {
+      "type": "string"
+    }
+  }
+}

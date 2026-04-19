@@ -1,0 +1,11 @@
+{
+  "ClusterIdentifier": "example_value",
+  "Database": "example_value",
+  "DbUser": "example_value",
+  "SecretArn": "example_value",
+  "WorkgroupName": "example_value",
+  "Table": "example_value",
+  "Schema": "example_value",
+  "MaxResults": 10,
+  "NextToken": "example_value"
+}

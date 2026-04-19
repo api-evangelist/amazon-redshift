@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetStatementResultRequest",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The identifier of the SQL statement whose results to fetch"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "A pagination token for the next page of results"
+    }
+  }
+}

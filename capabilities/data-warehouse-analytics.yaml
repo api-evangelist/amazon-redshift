@@ -1,0 +1,163 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Amazon Redshift Data Warehouse Analytics"
+  description: "Data warehouse analytics workflow combining Redshift Data API for SQL execution, statement management, and database metadata exploration. Used by data analysts and engineers for ad-hoc queries, ETL processing, and serverless data warehouse operations."
+  tags:
+    - Amazon
+    - AWS
+    - Analytics
+    - Data Warehouse
+    - SQL
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+      AWS_REGION: AWS_REGION
+
+capability:
+  consumes:
+    - import: redshift-data
+      location: ./shared/redshift-data.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: redshift-analytics-api
+      description: "Unified REST API for Amazon Redshift data warehouse analytics."
+      resources:
+        - path: /v1/statements
+          name: statements
+          description: "SQL statement execution"
+          operations:
+            - method: POST
+              name: execute-statement
+              description: "Execute a SQL statement"
+              call: "redshift-data.execute-statement"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: list-statements
+              description: "List SQL statements"
+              call: "redshift-data.list-statements"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/databases
+          name: databases
+          description: "Database metadata"
+          operations:
+            - method: GET
+              name: list-databases
+              description: "List databases"
+              call: "redshift-data.list-databases"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tables
+          name: tables
+          description: "Table metadata"
+          operations:
+            - method: GET
+              name: list-tables
+              description: "List tables in a schema"
+              call: "redshift-data.list-tables"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: redshift-analytics-mcp
+      transport: http
+      description: "MCP server for AI-assisted Amazon Redshift data warehouse analytics."
+      tools:
+        - name: execute-statement
+          description: "Execute a SQL statement asynchronously against Redshift"
+          hints:
+            readOnly: false
+          call: "redshift-data.execute-statement"
+          with:
+            sql: "tools.sql"
+            database: "tools.database"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: batch-execute-statement
+          description: "Execute multiple SQL statements in a batch transaction"
+          hints:
+            readOnly: false
+          call: "redshift-data.batch-execute-statement"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: describe-statement
+          description: "Get details about a SQL statement execution"
+          hints:
+            readOnly: true
+          call: "redshift-data.describe-statement"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-statements
+          description: "List SQL statement executions"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "redshift-data.list-statements"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: cancel-statement
+          description: "Cancel a running SQL statement"
+          hints:
+            destructive: true
+          call: "redshift-data.cancel-statement"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-statement-result
+          description: "Retrieve results from a completed SQL statement"
+          hints:
+            readOnly: true
+          call: "redshift-data.get-statement-result"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-databases
+          description: "List databases in a Redshift cluster or workgroup"
+          hints:
+            readOnly: true
+          call: "redshift-data.list-databases"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-schemas
+          description: "List schemas in a database"
+          hints:
+            readOnly: true
+          call: "redshift-data.list-schemas"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-tables
+          description: "List tables in a schema"
+          hints:
+            readOnly: true
+          call: "redshift-data.list-tables"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: describe-table
+          description: "Describe the columns of a table"
+          hints:
+            readOnly: true
+          call: "redshift-data.describe-table"
+          outputParameters:
+            - type: object
+              mapping: "$."

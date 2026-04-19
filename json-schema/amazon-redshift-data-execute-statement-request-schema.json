@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecuteStatementRequest",
+  "type": "object",
+  "properties": {
+    "ClusterIdentifier": {
+      "type": "string",
+      "description": "The cluster identifier. Required when connecting to a provisioned cluster. Mutually exclusive with WorkgroupName."
+    },
+    "Database": {
+      "type": "string",
+      "description": "The name of the database to run the SQL statement against"
+    },
+    "DbUser": {
+      "type": "string",
+      "description": "The database user name. Required when authenticating with temporary credentials from GetClusterCredentials."
+    },
+    "SecretArn": {
+      "type": "string",
+      "description": "The ARN of the secret stored in AWS Secrets Manager that contains the database credentials. Mutually exclusive with DbUser and temporary credentials."
+    },
+    "Sql": {
+      "type": "string",
+      "description": "The SQL statement to run. Maximum length is 100,000 characters."
+    },
+    "StatementName": {
+      "type": "string",
+      "description": "A name for the SQL statement. This name can be used to identify the query in the ListStatements output."
+    },
+    "WithEvent": {
+      "type": "boolean",
+      "description": "Whether to send an event to Amazon EventBridge when the SQL statement completes. Default is false."
+    },
+    "WorkgroupName": {
+      "type": "string",
+      "description": "The serverless workgroup name. Required when connecting to Redshift Serverless. Mutually exclusive with ClusterIdentifier."
+    },
+    "Parameters": {
+      "type": "array",
+      "description": "Named parameters for the SQL statement. Use :name syntax in the SQL string to reference parameters."
+    },
+    "ClientToken": {
+      "type": "string",
+      "description": "A unique, case-sensitive identifier to ensure idempotency of the request."
+    }
+  }
+}

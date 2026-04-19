@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ListStatementsRequest",
+  "type": "object",
+  "properties": {
+    "MaxResults": {
+      "type": "integer"
+    },
+    "NextToken": {
+      "type": "string"
+    },
+    "RoleLevel": {
+      "type": "boolean"
+    },
+    "StatementName": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    }
+  }
+}

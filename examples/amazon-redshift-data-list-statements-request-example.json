@@ -1,0 +1,7 @@
+{
+  "MaxResults": 10,
+  "NextToken": "example_value",
+  "RoleLevel": true,
+  "StatementName": "example_value",
+  "Status": "example_value"
+}

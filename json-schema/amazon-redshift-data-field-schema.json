@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Field",
+  "type": "object",
+  "description": "A single value in a result row. Exactly one of the typed properties will be present, corresponding to the column data type.",
+  "properties": {
+    "blobValue": {
+      "type": "string",
+      "description": "A value in binary format"
+    },
+    "booleanValue": {
+      "type": "boolean",
+      "description": "A boolean value"
+    },
+    "doubleValue": {
+      "type": "number",
+      "description": "A double-precision floating point value"
+    },
+    "isNull": {
+      "type": "boolean",
+      "description": "Whether the value is null"
+    },
+    "longValue": {
+      "type": "integer",
+      "description": "A long integer value"
+    },
+    "stringValue": {
+      "type": "string",
+      "description": "A string value"
+    }
+  }
+}

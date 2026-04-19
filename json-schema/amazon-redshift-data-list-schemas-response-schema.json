@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListSchemasResponse",
+  "type": "object",
+  "properties": {
+    "Schemas": {
+      "type": "array",
+      "description": "List of schema names"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "Pagination token for the next page"
+    }
+  }
+}

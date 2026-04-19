@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListDatabasesResponse",
+  "type": "object",
+  "properties": {
+    "Databases": {
+      "type": "array",
+      "description": "List of database names"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "Pagination token for the next page"
+    }
+  }
+}

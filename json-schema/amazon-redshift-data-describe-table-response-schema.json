@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DescribeTableResponse",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table"
+    },
+    "ColumnList": {
+      "type": "array",
+      "description": "List of column definitions for the table"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "Pagination token for the next page"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SqlParameter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the parameter (without the colon prefix)"
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the parameter"
+    }
+  }
+}

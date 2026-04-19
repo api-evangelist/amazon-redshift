@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ListSchemasRequest",
+  "type": "object",
+  "properties": {
+    "ClusterIdentifier": {
+      "type": "string"
+    },
+    "Database": {
+      "type": "string"
+    },
+    "DbUser": {
+      "type": "string"
+    },
+    "SecretArn": {
+      "type": "string"
+    },
+    "WorkgroupName": {
+      "type": "string"
+    },
+    "SchemaPattern": {
+      "type": "string"
+    },
+    "MaxResults": {
+      "type": "integer"
+    },
+    "NextToken": {
+      "type": "string"
+    }
+  }
+}

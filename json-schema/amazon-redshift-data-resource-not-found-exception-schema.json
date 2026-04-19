@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResourceNotFoundException",
+  "type": "object",
+  "properties": {
+    "Message": {
+      "type": "string",
+      "description": "A description of the resource not found error"
+    },
+    "ResourceId": {
+      "type": "string",
+      "description": "The identifier of the resource that was not found"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+name: amazon-redshift API Vocabulary
+provider: amazon-redshift
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 10
+schemas: 30
+tags:
+- Metadata
+- Result Retrieval
+- Statement Execution
+- Statement Management
