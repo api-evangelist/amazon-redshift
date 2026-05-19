@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Redshift Data API — Statement Execution
+  description: 'Amazon Redshift Data API — Statement Execution. 2 operations. Lead operation: Amazon Redshift Execute Multiple
+    Sql Statements in a Batch. Self-contained Naftiko capability covering one Amazon Redshift business surface.'
+  tags:
+  - Amazon Redshift
+  - Statement Execution
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_REDSHIFT_API_KEY: AMAZON_REDSHIFT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-statement-execution
+    baseUri: https://redshift-data.{region}.amazonaws.com
+    description: Amazon Redshift Data API — Statement Execution business capability. Self-contained, no shared references.
+    resources:
+    - name: BatchExecuteStatement
+      path: /BatchExecuteStatement
+      operations:
+      - name: batchexecutestatement
+        method: POST
+        description: Amazon Redshift Execute Multiple Sql Statements in a Batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ExecuteStatement
+      path: /ExecuteStatement
+      operations:
+      - name: executestatement
+        method: POST
+        description: Amazon Redshift Execute a Sql Statement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_REDSHIFT_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: data-statement-execution-rest
+    port: 8080
+    description: REST adapter for Amazon Redshift Data API — Statement Execution. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/batchexecutestatement
+      name: batchexecutestatement
+      description: REST surface for BatchExecuteStatement.
+      operations:
+      - method: POST
+        name: batchexecutestatement
+        description: Amazon Redshift Execute Multiple Sql Statements in a Batch
+        call: data-statement-execution.batchexecutestatement
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/executestatement
+      name: executestatement
+      description: REST surface for ExecuteStatement.
+      operations:
+      - method: POST
+        name: executestatement
+        description: Amazon Redshift Execute a Sql Statement
+        call: data-statement-execution.executestatement
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-statement-execution-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Redshift Data API — Statement Execution. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amazon-redshift-execute-multiple-sql
+      description: Amazon Redshift Execute Multiple Sql Statements in a Batch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-statement-execution.batchexecutestatement
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-redshift-execute-sql-statement
+      description: Amazon Redshift Execute a Sql Statement
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-statement-execution.executestatement
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
