@@ -1,0 +1,200 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Redshift Data API",
+    "version": "2019-12-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statement Execution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Redshift Execute a Sql Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/ExecuteStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs a SQL statement against an Amazon Redshift cluster or Amazon Redshift Serverless workgroup. The SQL statement runs asynchronously and returns a statement identifier that you can use to check the status with DescribeStatement and retrieve results with GetStatementResult. The maximum query result size is 100 MB."
+        },
+        {
+          "info": {
+            "name": "Amazon Redshift Execute Multiple Sql Statements in a Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/BatchExecuteStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs one or more SQL statements as a batch, which run as a single transaction. The statements run serially in the order provided. Returns a statement identifier for the batch that you can use with DescribeStatement and GetStatementResult."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Statement Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Redshift Describe a Sql Statement Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/DescribeStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes the details about a specific SQL statement run, including the status, duration, result size, and error information. Use the statement identifier returned by ExecuteStatement or BatchExecuteStatement to identify the statement."
+        },
+        {
+          "info": {
+            "name": "Amazon Redshift List Sql Statement Executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/ListStatements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists SQL statements that have been submitted. By default, only finished statements are shown. You can filter by status and optionally include statements submitted by all IAM users by setting RoleLevel to true. Results are ordered by creation time, with the most recent statements listed first."
+        },
+        {
+          "info": {
+            "name": "Amazon Redshift Cancel a Running Sql Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/CancelStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels a running SQL statement. The statement must be in the STARTED or SUBMITTED state to be cancelled."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Result Retrieval",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Redshift Get the Results of a Sql Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/GetStatementResult",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetches the result of a SQL statement that was submitted with ExecuteStatement or BatchExecuteStatement. The statement must have completed successfully (status FINISHED). Results are paginated and the maximum result size is 100 MB. Use the NextToken parameter to retrieve subsequent pages."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Redshift List Databases in a Cluster or Workgroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/ListDatabases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the databases in a cluster or workgroup. The databases are retrieved from the system catalog. A token is returned to page through the database list."
+        },
+        {
+          "info": {
+            "name": "Amazon Redshift List Schemas in a Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/ListSchemas",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the schemas in a database. A token is returned to page through the schema list. You can filter the results by providing a schema name pattern."
+        },
+        {
+          "info": {
+            "name": "Amazon Redshift List Tables in a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/ListTables",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the tables in a database. You can filter by schema or table name pattern. A token is returned to page through the table list."
+        },
+        {
+          "info": {
+            "name": "Amazon Redshift Describe the Columns of a Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/DescribeTable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes the detailed information about a table and its columns. Returns column names, data types, and other metadata for a specified table."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
