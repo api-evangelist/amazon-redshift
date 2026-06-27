@@ -41,10 +41,10 @@ apis:
         url: https://aws.amazon.com/redshift/pricing/
       - type: Console
         url: https://console.aws.amazon.com/redshift/
-      - type: SDK
+      - type: SDKs
         url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html
         title: Python SDK
-      - type: SDK
+      - type: SDKs
         url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift/
         title: JavaScript SDK
       - type: CLI
@@ -77,10 +77,10 @@ apis:
         url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
       - type: OpenAPI
         url: openapi/amazon-redshift-data-api-openapi.yml
-      - type: SDK
+      - type: SDKs
         url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
         title: Python SDK
-      - type: SDK
+      - type: SDKs
         url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
         title: JavaScript SDK
       - type: CLI
@@ -104,10 +104,10 @@ apis:
         url: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-serverless.html
       - type: APIReference
         url: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/Welcome.html
-      - type: SDK
+      - type: SDKs
         url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-serverless.html
         title: Python SDK
-      - type: SDK
+      - type: SDKs
         url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-serverless/
         title: JavaScript SDK
       - type: CLI
