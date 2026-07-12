@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/amazon-redshift-data-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: sigv4Auth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: AWS Signature Version 4 authentication. Requests are signed using IAM credentials.
+    The Data API also supports authentication via AWS Secrets Manager for database credentials
+    or temporary IAM credentials.
+  sources:
+  - openapi/amazon-redshift-data-api-openapi.yml
