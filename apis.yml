@@ -117,6 +117,8 @@ apis:
       - type: Pricing
         url: https://aws.amazon.com/redshift/pricing/
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-redshift-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-redshift-trust-center.yml
   - type: VulnerabilityDisclosure
