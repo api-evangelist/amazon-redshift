@@ -1,0 +1,495 @@
+openapi: 3.1.0
+info:
+  title: Amazon Redshift Data Metadata API
+  description: The Amazon Redshift Data API enables you to run SQL statements on Amazon Redshift clusters and Amazon Redshift Serverless workgroups without managing database connections or drivers. The Data API handles connection management, authentication via IAM or Secrets Manager, and supports asynchronous execution of SQL statements with result retrieval through a statement identifier. Ideal for building serverless applications, integrating with AWS Lambda, and running ad-hoc queries programmatically.
+  version: '2019-12-20'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/redshift/
+  termsOfService: https://aws.amazon.com/service-terms/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://redshift-data.{region}.amazonaws.com
+  description: Amazon Redshift Data API regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region identifier
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-central-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ca-central-1
+      - sa-east-1
+security:
+- sigv4Auth: []
+tags:
+- name: Metadata
+  description: List databases, schemas, and tables in a Redshift data warehouse
+paths:
+  /ListDatabases:
+    post:
+      operationId: listDatabases
+      summary: Amazon Redshift List Databases in a Cluster or Workgroup
+      description: Lists the databases in a cluster or workgroup. The databases are retrieved from the system catalog. A token is returned to page through the database list.
+      tags:
+      - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDatabasesRequest'
+      responses:
+        '200':
+          description: Database list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatabasesResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ListSchemas:
+    post:
+      operationId: listSchemas
+      summary: Amazon Redshift List Schemas in a Database
+      description: Lists the schemas in a database. A token is returned to page through the schema list. You can filter the results by providing a schema name pattern.
+      tags:
+      - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSchemasRequest'
+      responses:
+        '200':
+          description: Schema list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSchemasResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ListTables:
+    post:
+      operationId: listTables
+      summary: Amazon Redshift List Tables in a Schema
+      description: Lists the tables in a database. You can filter by schema or table name pattern. A token is returned to page through the table list.
+      tags:
+      - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTablesRequest'
+      responses:
+        '200':
+          description: Table list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTablesResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /DescribeTable:
+    post:
+      operationId: describeTable
+      summary: Amazon Redshift Describe the Columns of a Table
+      description: Describes the detailed information about a table and its columns. Returns column names, data types, and other metadata for a specified table.
+      tags:
+      - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTableRequest'
+      responses:
+        '200':
+          description: Table description retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTableResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TableMember:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the table
+          example: Example Title
+        type:
+          type: string
+          description: The type of the table (TABLE, VIEW, etc.)
+          example: example_value
+        schema:
+          type: string
+          description: The schema that contains the table
+          example: example_value
+    ColumnMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the column
+          example: Example Title
+        label:
+          type: string
+          description: The label of the column (display name)
+          example: Example Title
+        typeName:
+          type: string
+          description: The database-specific data type name of the column
+          example: varchar
+        columnDefault:
+          type: string
+          description: The default value for the column
+          example: example_value
+        isCaseSensitive:
+          type: boolean
+          description: Whether the column is case-sensitive
+          example: true
+        isCurrency:
+          type: boolean
+          description: Whether the column contains currency data
+          example: true
+        isSigned:
+          type: boolean
+          description: Whether the column values are signed numbers
+          example: true
+        nullable:
+          type: integer
+          description: Indicates the nullability of the column. 0 = not nullable, 1 = nullable, 2 = unknown.
+          enum:
+          - 0
+          - 1
+          - 2
+          example: 0
+        precision:
+          type: integer
+          description: The precision of the column for numeric types
+          example: 10
+        scale:
+          type: integer
+          description: The scale of the column for numeric types
+          example: 10
+        length:
+          type: integer
+          description: The length of the column for character types
+          example: 10
+        schemaName:
+          type: string
+          description: The schema name that contains the table
+          example: example_value
+        tableName:
+          type: string
+          description: The name of the table that contains the column
+          example: example_value
+    ListTablesRequest:
+      type: object
+      required:
+      - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        Database:
+          type: string
+          description: The name of the database containing the tables
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+          example: example_value
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SchemaPattern:
+          type: string
+          description: A schema name pattern to filter tables
+          example: example_value
+        TablePattern:
+          type: string
+          description: A table name pattern to filter tables
+          example: sales%
+        MaxResults:
+          type: integer
+          description: Maximum number of tables to return
+          minimum: 0
+          maximum: 1000
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    DescribeTableRequest:
+      type: object
+      required:
+      - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        Database:
+          type: string
+          description: The name of the database
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+          example: example_value
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        Table:
+          type: string
+          description: The table name. Can be qualified with schema name as schema_name.table_name.
+          example: public.sales
+        Schema:
+          type: string
+          description: The schema that contains the table. Default is public.
+          default: public
+          example: example_value
+        MaxResults:
+          type: integer
+          description: Maximum number of columns to return
+          minimum: 0
+          maximum: 1000
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ListDatabasesRequest:
+      type: object
+      required:
+      - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        Database:
+          type: string
+          description: The name of the database to use for connection. For provisioned clusters this is typically 'dev'.
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+          example: example_value
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        MaxResults:
+          type: integer
+          description: Maximum number of databases to return
+          minimum: 0
+          maximum: 1000
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ListSchemasResponse:
+      type: object
+      properties:
+        Schemas:
+          type: array
+          description: List of schema names
+          items:
+            type: string
+          example: []
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    DescribeTableResponse:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: The name of the table
+          example: example_value
+        ColumnList:
+          type: array
+          description: List of column definitions for the table
+          items:
+            $ref: '#/components/schemas/ColumnMetadata'
+          example: []
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the validation error
+          example: example_value
+    ListDatabasesResponse:
+      type: object
+      properties:
+        Databases:
+          type: array
+          description: List of database names
+          items:
+            type: string
+          example: []
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ListTablesResponse:
+      type: object
+      properties:
+        Tables:
+          type: array
+          description: List of tables
+          items:
+            $ref: '#/components/schemas/TableMember'
+          example: []
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ListSchemasRequest:
+      type: object
+      required:
+      - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        Database:
+          type: string
+          description: The name of the database containing the schemas
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+          example: example_value
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SchemaPattern:
+          type: string
+          description: A pattern to filter schemas. Uses SQL LIKE syntax where underscore matches one character and percent matches zero or more characters.
+          example: public%
+        MaxResults:
+          type: integer
+          description: Maximum number of schemas to return
+          minimum: 0
+          maximum: 1000
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    InternalServerException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the internal server error
+          example: example_value
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. Requests are signed using IAM credentials. The Data API also supports authentication via AWS Secrets Manager for database credentials or temporary IAM credentials.
+externalDocs:
+  description: Amazon Redshift Data API Reference
+  url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html

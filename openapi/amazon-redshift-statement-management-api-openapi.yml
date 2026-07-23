@@ -1,0 +1,508 @@
+openapi: 3.1.0
+info:
+  title: Amazon Redshift Data Metadata Statement Management API
+  description: The Amazon Redshift Data API enables you to run SQL statements on Amazon Redshift clusters and Amazon Redshift Serverless workgroups without managing database connections or drivers. The Data API handles connection management, authentication via IAM or Secrets Manager, and supports asynchronous execution of SQL statements with result retrieval through a statement identifier. Ideal for building serverless applications, integrating with AWS Lambda, and running ad-hoc queries programmatically.
+  version: '2019-12-20'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/redshift/
+  termsOfService: https://aws.amazon.com/service-terms/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://redshift-data.{region}.amazonaws.com
+  description: Amazon Redshift Data API regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region identifier
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-central-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ca-central-1
+      - sa-east-1
+security:
+- sigv4Auth: []
+tags:
+- name: Statement Management
+  description: Describe, list, and cancel SQL statement executions
+paths:
+  /DescribeStatement:
+    post:
+      operationId: describeStatement
+      summary: Amazon Redshift Describe a Sql Statement Execution
+      description: Describes the details about a specific SQL statement run, including the status, duration, result size, and error information. Use the statement identifier returned by ExecuteStatement or BatchExecuteStatement to identify the statement.
+      tags:
+      - Statement Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStatementRequest'
+      responses:
+        '200':
+          description: Statement details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStatementResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '404':
+          description: Statement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ListStatements:
+    post:
+      operationId: listStatements
+      summary: Amazon Redshift List Sql Statement Executions
+      description: Lists SQL statements that have been submitted. By default, only finished statements are shown. You can filter by status and optionally include statements submitted by all IAM users by setting RoleLevel to true. Results are ordered by creation time, with the most recent statements listed first.
+      tags:
+      - Statement Management
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStatementsRequest'
+      responses:
+        '200':
+          description: Statement list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStatementsResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /CancelStatement:
+    post:
+      operationId: cancelStatement
+      summary: Amazon Redshift Cancel a Running Sql Statement
+      description: Cancels a running SQL statement. The statement must be in the STARTED or SUBMITTED state to be cancelled.
+      tags:
+      - Statement Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelStatementRequest'
+      responses:
+        '200':
+          description: Statement cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelStatementResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '404':
+          description: Statement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CancelStatementResponse:
+      type: object
+      properties:
+        Status:
+          type: boolean
+          description: Whether the cancel request was successful
+          example: true
+    SqlParameter:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: The name of the parameter (without the colon prefix)
+          example: sale_date
+        value:
+          type: string
+          description: The value of the parameter
+          example: '2025-01-01'
+    CancelStatementRequest:
+      type: object
+      required:
+      - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement to cancel
+          example: abc123
+    SubStatementData:
+      type: object
+      required:
+      - Id
+      properties:
+        Id:
+          type: string
+          description: The identifier of the sub-statement
+          example: abc123
+        Status:
+          type: string
+          description: The status of the sub-statement
+          enum:
+          - SUBMITTED
+          - PICKED
+          - STARTED
+          - FINISHED
+          - ABORTED
+          - FAILED
+          example: SUBMITTED
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the sub-statement was created
+          example: '2026-01-15T10:30:00Z'
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: The date and time the sub-statement was last updated
+          example: '2026-01-15T10:30:00Z'
+        Duration:
+          type: integer
+          format: int64
+          description: The time in nanoseconds the sub-statement ran
+          example: 10
+        QueryString:
+          type: string
+          description: The SQL statement text
+          example: example_value
+        RedshiftQueryId:
+          type: integer
+          format: int64
+          description: The Redshift query identifier
+          example: '500123'
+        ResultRows:
+          type: integer
+          format: int64
+          description: Total number of rows in the result set
+          example: 10
+        ResultSize:
+          type: integer
+          format: int64
+          description: The size of the result set in bytes
+          example: 10
+        HasResultSet:
+          type: boolean
+          description: Whether the sub-statement has a result set
+          example: true
+        Error:
+          type: string
+          description: The error message if the sub-statement failed
+          example: example_value
+    ResourceNotFoundException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the resource not found error
+          example: example_value
+        ResourceId:
+          type: string
+          description: The identifier of the resource that was not found
+          example: '500123'
+    ListStatementsResponse:
+      type: object
+      required:
+      - Statements
+      properties:
+        Statements:
+          type: array
+          description: List of SQL statements
+          items:
+            $ref: '#/components/schemas/StatementData'
+          example: []
+        NextToken:
+          type: string
+          description: A pagination token to retrieve the next set of results. Null if there are no more results.
+          example: example_value
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the validation error
+          example: example_value
+    StatementData:
+      type: object
+      required:
+      - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement
+          example: abc123
+        StatementName:
+          type: string
+          description: The name of the SQL statement
+          example: example_value
+        Status:
+          type: string
+          description: The status of the SQL statement
+          enum:
+          - SUBMITTED
+          - PICKED
+          - STARTED
+          - FINISHED
+          - ABORTED
+          - FAILED
+          example: SUBMITTED
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was created
+          example: '2026-01-15T10:30:00Z'
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was last updated
+          example: '2026-01-15T10:30:00Z'
+        QueryString:
+          type: string
+          description: The SQL statement text
+          example: example_value
+        QueryParameters:
+          type: array
+          description: The query parameters
+          items:
+            $ref: '#/components/schemas/SqlParameter'
+          example: []
+        Database:
+          type: string
+          description: The name of the database
+          example: example_value
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SecretArn:
+          type: string
+          description: The secret ARN
+          example: example_value
+        IsBatchStatement:
+          type: boolean
+          description: Whether this is a batch statement
+          example: true
+    DescribeStatementResponse:
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement
+          example: abc123
+        Status:
+          type: string
+          description: The status of the SQL statement
+          enum:
+          - SUBMITTED
+          - PICKED
+          - STARTED
+          - FINISHED
+          - ABORTED
+          - FAILED
+          example: SUBMITTED
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was created
+          example: '2026-01-15T10:30:00Z'
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was last updated
+          example: '2026-01-15T10:30:00Z'
+        Duration:
+          type: integer
+          format: int64
+          description: The time in nanoseconds the statement ran
+          example: 10
+        QueryString:
+          type: string
+          description: The SQL statement that was executed
+          example: example_value
+        QueryParameters:
+          type: array
+          description: The parameters for the SQL statement
+          items:
+            $ref: '#/components/schemas/SqlParameter'
+          example: []
+        Database:
+          type: string
+          description: The name of the database
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user
+          example: example_value
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SecretArn:
+          type: string
+          description: The secret ARN
+          example: example_value
+        RedshiftPid:
+          type: integer
+          format: int64
+          description: The process identifier from the Redshift cluster
+          example: '500123'
+        RedshiftQueryId:
+          type: integer
+          format: int64
+          description: The Redshift query identifier
+          example: '500123'
+        ResultRows:
+          type: integer
+          format: int64
+          description: Total number of rows in the result set (FINISHED only)
+          example: 10
+        ResultSize:
+          type: integer
+          format: int64
+          description: The size of the result set in bytes
+          example: 10
+        HasResultSet:
+          type: boolean
+          description: Whether the statement has a result set
+          example: true
+        Error:
+          type: string
+          description: The error message if the statement failed
+          example: example_value
+        SubStatements:
+          type: array
+          description: List of sub-statements for a batch execution. Only present for BatchExecuteStatement calls.
+          items:
+            $ref: '#/components/schemas/SubStatementData'
+          example: []
+    DescribeStatementRequest:
+      type: object
+      required:
+      - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement to describe. This value is returned by ExecuteStatement or BatchExecuteStatement.
+          example: c016234e-5c6c-4bc5-bb66-2c776b0e92db
+    InternalServerException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the internal server error
+          example: example_value
+    ListStatementsRequest:
+      type: object
+      properties:
+        MaxResults:
+          type: integer
+          description: The maximum number of SQL statements to return in the response. Valid range is 0 to 100. Default is 100.
+          minimum: 0
+          maximum: 100
+          default: 100
+          example: 10
+        NextToken:
+          type: string
+          description: A value that indicates the starting point for the next set of response records in a subsequent request.
+          example: example_value
+        RoleLevel:
+          type: boolean
+          description: When true, returns statements submitted by all IAM users in the account. Default is false, which returns only statements from the calling user.
+          default: false
+          example: true
+        StatementName:
+          type: string
+          description: Filter results by a specific statement name
+          example: example_value
+        Status:
+          type: string
+          description: Filter results by statement status
+          enum:
+          - SUBMITTED
+          - PICKED
+          - STARTED
+          - FINISHED
+          - ABORTED
+          - FAILED
+          - ALL
+          example: SUBMITTED
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. Requests are signed using IAM credentials. The Data API also supports authentication via AWS Secrets Manager for database credentials or temporary IAM credentials.
+externalDocs:
+  description: Amazon Redshift Data API Reference
+  url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html

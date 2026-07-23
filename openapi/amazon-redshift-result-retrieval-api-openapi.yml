@@ -1,0 +1,249 @@
+openapi: 3.1.0
+info:
+  title: Amazon Redshift Data Metadata Result Retrieval API
+  description: The Amazon Redshift Data API enables you to run SQL statements on Amazon Redshift clusters and Amazon Redshift Serverless workgroups without managing database connections or drivers. The Data API handles connection management, authentication via IAM or Secrets Manager, and supports asynchronous execution of SQL statements with result retrieval through a statement identifier. Ideal for building serverless applications, integrating with AWS Lambda, and running ad-hoc queries programmatically.
+  version: '2019-12-20'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/redshift/
+  termsOfService: https://aws.amazon.com/service-terms/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://redshift-data.{region}.amazonaws.com
+  description: Amazon Redshift Data API regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region identifier
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-central-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ca-central-1
+      - sa-east-1
+security:
+- sigv4Auth: []
+tags:
+- name: Result Retrieval
+  description: Retrieve results from completed SQL statement executions
+paths:
+  /GetStatementResult:
+    post:
+      operationId: getStatementResult
+      summary: Amazon Redshift Get the Results of a Sql Statement
+      description: Fetches the result of a SQL statement that was submitted with ExecuteStatement or BatchExecuteStatement. The statement must have completed successfully (status FINISHED). Results are paginated and the maximum result size is 100 MB. Use the NextToken parameter to retrieve subsequent pages.
+      tags:
+      - Result Retrieval
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetStatementResultRequest'
+      responses:
+        '200':
+          description: Statement results retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStatementResultResponse'
+        '400':
+          description: Invalid request - validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '404':
+          description: Statement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ColumnMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the column
+          example: Example Title
+        label:
+          type: string
+          description: The label of the column (display name)
+          example: Example Title
+        typeName:
+          type: string
+          description: The database-specific data type name of the column
+          example: varchar
+        columnDefault:
+          type: string
+          description: The default value for the column
+          example: example_value
+        isCaseSensitive:
+          type: boolean
+          description: Whether the column is case-sensitive
+          example: true
+        isCurrency:
+          type: boolean
+          description: Whether the column contains currency data
+          example: true
+        isSigned:
+          type: boolean
+          description: Whether the column values are signed numbers
+          example: true
+        nullable:
+          type: integer
+          description: Indicates the nullability of the column. 0 = not nullable, 1 = nullable, 2 = unknown.
+          enum:
+          - 0
+          - 1
+          - 2
+          example: 0
+        precision:
+          type: integer
+          description: The precision of the column for numeric types
+          example: 10
+        scale:
+          type: integer
+          description: The scale of the column for numeric types
+          example: 10
+        length:
+          type: integer
+          description: The length of the column for character types
+          example: 10
+        schemaName:
+          type: string
+          description: The schema name that contains the table
+          example: example_value
+        tableName:
+          type: string
+          description: The name of the table that contains the column
+          example: example_value
+    GetStatementResultRequest:
+      type: object
+      required:
+      - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement whose results to fetch
+          example: abc123
+        NextToken:
+          type: string
+          description: A pagination token for the next page of results
+          example: example_value
+    GetStatementResultResponse:
+      type: object
+      required:
+      - Records
+      properties:
+        Records:
+          type: array
+          description: The results of the SQL statement as an array of rows
+          items:
+            type: array
+            description: A single row of results
+            items:
+              $ref: '#/components/schemas/Field'
+          example: []
+        ColumnMetadata:
+          type: array
+          description: Metadata about the columns in the result set
+          items:
+            $ref: '#/components/schemas/ColumnMetadata'
+          example: []
+        TotalNumRows:
+          type: integer
+          format: int64
+          description: Total number of rows in the result set
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page of results
+          example: example_value
+    ResourceNotFoundException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the resource not found error
+          example: example_value
+        ResourceId:
+          type: string
+          description: The identifier of the resource that was not found
+          example: '500123'
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the validation error
+          example: example_value
+    Field:
+      type: object
+      description: A single value in a result row. Exactly one of the typed properties will be present, corresponding to the column data type.
+      properties:
+        blobValue:
+          type: string
+          format: byte
+          description: A value in binary format
+          example: example_value
+        booleanValue:
+          type: boolean
+          description: A boolean value
+          example: true
+        doubleValue:
+          type: number
+          format: double
+          description: A double-precision floating point value
+          example: 42.5
+        isNull:
+          type: boolean
+          description: Whether the value is null
+          example: true
+        longValue:
+          type: integer
+          format: int64
+          description: A long integer value
+          example: 10
+        stringValue:
+          type: string
+          description: A string value
+          example: example_value
+    InternalServerException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the internal server error
+          example: example_value
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. Requests are signed using IAM credentials. The Data API also supports authentication via AWS Secrets Manager for database credentials or temporary IAM credentials.
+externalDocs:
+  description: Amazon Redshift Data API Reference
+  url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
