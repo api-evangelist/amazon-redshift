@@ -3,6 +3,19 @@ name: Amazon Redshift
 description: >-
   Amazon Redshift is a fast, fully managed cloud data warehouse that makes it simple and cost-effective to analyze all
   your data using standard SQL and your existing Business Intelligence (BI) tools.
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Paid (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://raw.githubusercontent.com/api-evangelist/amazon-redshift/refs/heads/main/apis.yml
 created: '2024-01-01'
@@ -19,104 +32,235 @@ tags:
   - Serverless
   - SQL
 apis:
-  - name: Amazon Redshift API
-    description: The Amazon Redshift API for managing clusters, snapshots, and configurations.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://aws.amazon.com/redshift/
-    baseURL: https://redshift.amazonaws.com
-    tags:
-      - Clusters
-      - Data Warehouse
-      - Snapshots
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/redshift/
-      - type: OpenAPI
-        url: https://api.apis.guru/v2/specs/amazonaws.com/redshift/2012-12-01/openapi.yaml
-      - type: APIReference
-        url: https://docs.aws.amazon.com/redshift/latest/APIReference/Welcome.html
-      - type: GettingStarted
-        url: https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html
-      - type: Pricing
-        url: https://aws.amazon.com/redshift/pricing/
-      - type: Console
-        url: https://console.aws.amazon.com/redshift/
-      - type: SDKs
-        url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html
-        title: Python SDK
-      - type: SDKs
-        url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift/
-        title: JavaScript SDK
-      - type: CLI
-        url: https://docs.aws.amazon.com/cli/latest/reference/redshift/
-      - type: BestPractices
-        url: https://docs.aws.amazon.com/redshift/latest/dg/best-practices.html
-      - type: Security
-        url: https://docs.aws.amazon.com/redshift/latest/mgmt/security.html
-      - type: FAQ
-        url: https://aws.amazon.com/redshift/faqs/
-      - type: ReleaseNotes
-        url: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
-      - type: ChangeLog
-        url: https://docs.aws.amazon.com/redshift/latest/mgmt/document-history.html
-  - name: Amazon Redshift Data API
-    description: >-
-      The Amazon Redshift Data API for running SQL statements without managing connections. Supports asynchronous
-      execution with IAM and Secrets Manager authentication.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
-    baseURL: https://redshift-data.amazonaws.com
-    tags:
-      - Data API
-      - Serverless
-      - SQL
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
-      - type: APIReference
-        url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
-      - type: OpenAPI
-        url: openapi/amazon-redshift-data-api-openapi.yml
-      - type: SDKs
-        url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
-        title: Python SDK
-      - type: SDKs
-        url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
-        title: JavaScript SDK
-      - type: CLI
-        url: https://docs.aws.amazon.com/cli/latest/reference/redshift-data/
-      - type: GettingStarted
-        url: https://aws.amazon.com/blogs/big-data/get-started-with-the-amazon-redshift-data-api/
-  - name: Amazon Redshift Serverless API
-    description: >-
-      The Amazon Redshift Serverless API for managing serverless data warehouse workgroups, namespaces, and capacity
-      without provisioning clusters.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html
-    baseURL: https://redshift-serverless.amazonaws.com
-    tags:
-      - Data Warehouse
-      - Namespaces
-      - Serverless
-      - Workgroups
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-serverless.html
-      - type: APIReference
-        url: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/Welcome.html
-      - type: SDKs
-        url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-serverless.html
-        title: Python SDK
-      - type: SDKs
-        url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-serverless/
-        title: JavaScript SDK
-      - type: CLI
-        url: https://docs.aws.amazon.com/cli/latest/reference/redshift-serverless/
-      - type: GettingStarted
-        url: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html
-      - type: Pricing
-        url: https://aws.amazon.com/redshift/pricing/
+- name: Amazon Redshift Serverless API
+  description: >-
+    The Amazon Redshift Serverless API for managing serverless data warehouse workgroups, namespaces,
+    and capacity without provisioning clusters.
+  image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  humanURL: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html
+  baseURL: https://redshift-serverless.amazonaws.com
+  tags:
+  - Data Warehouse
+  - Namespaces
+  - Serverless
+  - Workgroups
+  properties:
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-serverless.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/Welcome.html
+  - type: SDKs
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-serverless.html
+    title: Python SDK
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-serverless/
+    title: JavaScript SDK
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift-serverless/
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html
+  - type: Pricing
+    url: https://aws.amazon.com/redshift/pricing/
+- aid: amazon-redshift:amazon-redshift-metadata-api
+  name: Amazon Redshift Metadata API
+  description: List databases, schemas, and tables in a Redshift data warehouse
+  humanURL: https://aws.amazon.com/redshift/
+  baseURL: https://redshift.amazonaws.com
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-redshift-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html
+  - type: Pricing
+    url: https://aws.amazon.com/redshift/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/redshift/
+  - type: SDKs
+    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift/
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/redshift/latest/dg/best-practices.html
+  - type: Security
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/security.html
+  - type: FAQ
+    url: https://aws.amazon.com/redshift/faqs/
+  - type: ReleaseNotes
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/document-history.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
+  - type: SDKs
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift-data/
+  - type: GettingStarted
+    url: https://aws.amazon.com/blogs/big-data/get-started-with-the-amazon-redshift-data-api/
+- aid: amazon-redshift:amazon-redshift-result-retrieval-api
+  name: Amazon Redshift Result Retrieval API
+  description: Retrieve results from completed SQL statement executions
+  humanURL: https://aws.amazon.com/redshift/
+  baseURL: https://redshift.amazonaws.com
+  tags:
+  - Result Retrieval
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-redshift-result-retrieval-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html
+  - type: Pricing
+    url: https://aws.amazon.com/redshift/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/redshift/
+  - type: SDKs
+    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift/
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/redshift/latest/dg/best-practices.html
+  - type: Security
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/security.html
+  - type: FAQ
+    url: https://aws.amazon.com/redshift/faqs/
+  - type: ReleaseNotes
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/document-history.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
+  - type: SDKs
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift-data/
+  - type: GettingStarted
+    url: https://aws.amazon.com/blogs/big-data/get-started-with-the-amazon-redshift-data-api/
+- aid: amazon-redshift:amazon-redshift-statement-execution-api
+  name: Amazon Redshift Statement Execution API
+  description: Execute SQL statements against Amazon Redshift clusters or serverless workgroups
+  humanURL: https://aws.amazon.com/redshift/
+  baseURL: https://redshift.amazonaws.com
+  tags:
+  - Statement Execution
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-redshift-statement-execution-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html
+  - type: Pricing
+    url: https://aws.amazon.com/redshift/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/redshift/
+  - type: SDKs
+    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift/
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/redshift/latest/dg/best-practices.html
+  - type: Security
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/security.html
+  - type: FAQ
+    url: https://aws.amazon.com/redshift/faqs/
+  - type: ReleaseNotes
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/document-history.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
+  - type: SDKs
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift-data/
+  - type: GettingStarted
+    url: https://aws.amazon.com/blogs/big-data/get-started-with-the-amazon-redshift-data-api/
+- aid: amazon-redshift:amazon-redshift-statement-management-api
+  name: Amazon Redshift Statement Management API
+  description: Describe, list, and cancel SQL statement executions
+  humanURL: https://aws.amazon.com/redshift/
+  baseURL: https://redshift.amazonaws.com
+  tags:
+  - Statement Management
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-redshift-statement-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html
+  - type: Pricing
+    url: https://aws.amazon.com/redshift/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/redshift/
+  - type: SDKs
+    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift/
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/redshift/latest/dg/best-practices.html
+  - type: Security
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/security.html
+  - type: FAQ
+    url: https://aws.amazon.com/redshift/faqs/
+  - type: ReleaseNotes
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/document-history.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
+  - type: SDKs
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
+  - type: SDKs
+    url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
+  - type: CLI
+    url: https://docs.aws.amazon.com/cli/latest/reference/redshift-data/
+  - type: GettingStarted
+    url: https://aws.amazon.com/blogs/big-data/get-started-with-the-amazon-redshift-data-api/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/amazon-redshift/overview
   - type: AgenticAccess
     url: agentic-access/amazon-redshift-agentic-access.yml
   - type: TrustCenter
