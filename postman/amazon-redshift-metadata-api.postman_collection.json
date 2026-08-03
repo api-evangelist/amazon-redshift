@@ -1,0 +1,932 @@
+{
+  "info": {
+    "_postman_id": "a9bdedba-a5fd-472b-8650-892195e14af8",
+    "name": "Amazon Redshift Data Metadata API",
+    "description": "The Amazon Redshift Data API enables you to run SQL statements on Amazon Redshift clusters and Amazon Redshift Serverless workgroups without managing database connections or drivers. The Data API handles connection management, authentication via IAM or Secrets Manager, and supports asynchronous execution of SQL statements with result retrieval through a statement identifier. Ideal for building serverless applications, integrating with AWS Lambda, and running ad-hoc queries programmatically.\n\nContact Support:\n Name: Amazon Web Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:52:09.000Z",
+    "updatedAt": "2026-07-28T00:52:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a9bdedba-a5fd-472b-8650-892195e14af8"
+  },
+  "item": [
+    {
+      "name": "ListDatabases",
+      "item": [
+        {
+          "name": "Amazon Redshift List Databases in a Cluster or Workgroup",
+          "id": "10d23ea1-d472-40c0-a0b6-115d006a1f83",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ListDatabases",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ListDatabases"
+              ]
+            },
+            "description": "Lists the databases in a cluster or workgroup. The databases are retrieved from the system catalog. A token is returned to page through the database list."
+          },
+          "response": [
+            {
+              "id": "8a70f142-601b-4b85-b651-53f40a0eda28",
+              "name": "Database list retrieved successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListDatabases",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListDatabases"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Databases\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-8a70f142-601b-4b85-b651-53f40a0eda28"
+            },
+            {
+              "id": "7e3c110d-190f-41e5-b2c3-9e8618f4be4e",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListDatabases",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListDatabases"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-7e3c110d-190f-41e5-b2c3-9e8618f4be4e"
+            },
+            {
+              "id": "c602a3ea-e428-41eb-9d90-0645239eb013",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListDatabases",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListDatabases"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-c602a3ea-e428-41eb-9d90-0645239eb013"
+            }
+          ],
+          "createdAt": "2026-07-28T00:52:10.000Z",
+          "updatedAt": "2026-07-28T00:52:10.000Z",
+          "uid": "35240-10d23ea1-d472-40c0-a0b6-115d006a1f83"
+        }
+      ],
+      "id": "fb0b36f9-623d-4bc9-bdbd-e44efb209402",
+      "createdAt": "2026-07-28T00:52:10.000Z",
+      "updatedAt": "2026-07-28T00:52:10.000Z",
+      "uid": "35240-fb0b36f9-623d-4bc9-bdbd-e44efb209402"
+    },
+    {
+      "name": "ListSchemas",
+      "item": [
+        {
+          "name": "Amazon Redshift List Schemas in a Database",
+          "id": "49213ac4-a7c3-4166-92a0-212c6c829e34",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SchemaPattern\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ListSchemas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ListSchemas"
+              ]
+            },
+            "description": "Lists the schemas in a database. A token is returned to page through the schema list. You can filter the results by providing a schema name pattern."
+          },
+          "response": [
+            {
+              "id": "d20dd8f9-51b3-429f-8c02-edc4d73267c6",
+              "name": "Schema list retrieved successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SchemaPattern\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListSchemas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListSchemas"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-d20dd8f9-51b3-429f-8c02-edc4d73267c6"
+            },
+            {
+              "id": "56f3dffb-6da1-45a1-97d4-c7f1e6f5fb61",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SchemaPattern\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListSchemas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListSchemas"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-56f3dffb-6da1-45a1-97d4-c7f1e6f5fb61"
+            },
+            {
+              "id": "46bf7167-c3ef-41fc-a639-7d6e1562dd05",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SchemaPattern\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListSchemas",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListSchemas"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-46bf7167-c3ef-41fc-a639-7d6e1562dd05"
+            }
+          ],
+          "createdAt": "2026-07-28T00:52:10.000Z",
+          "updatedAt": "2026-07-28T00:52:10.000Z",
+          "uid": "35240-49213ac4-a7c3-4166-92a0-212c6c829e34"
+        }
+      ],
+      "id": "246c3b04-58b0-4b1d-bd75-24bcde968fd5",
+      "createdAt": "2026-07-28T00:52:10.000Z",
+      "updatedAt": "2026-07-28T00:52:10.000Z",
+      "uid": "35240-246c3b04-58b0-4b1d-bd75-24bcde968fd5"
+    },
+    {
+      "name": "ListTables",
+      "item": [
+        {
+          "name": "Amazon Redshift List Tables in a Schema",
+          "id": "fa78b37a-9a26-4f42-8944-ae617c8066cd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SchemaPattern\": \"<string>\",\n  \"TablePattern\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ListTables",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ListTables"
+              ]
+            },
+            "description": "Lists the tables in a database. You can filter by schema or table name pattern. A token is returned to page through the table list."
+          },
+          "response": [
+            {
+              "id": "e8a0f645-8ee2-4979-a501-fc2278e22c2c",
+              "name": "Table list retrieved successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SchemaPattern\": \"<string>\",\n  \"TablePattern\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListTables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListTables"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Tables\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"schema\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"schema\": \"<string>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-e8a0f645-8ee2-4979-a501-fc2278e22c2c"
+            },
+            {
+              "id": "90a18209-9a7f-4978-9ab5-d3289831b81e",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SchemaPattern\": \"<string>\",\n  \"TablePattern\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListTables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListTables"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-90a18209-9a7f-4978-9ab5-d3289831b81e"
+            },
+            {
+              "id": "6b6b74f5-ad26-4f3a-922f-55dfe70c54b6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SchemaPattern\": \"<string>\",\n  \"TablePattern\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListTables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListTables"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-6b6b74f5-ad26-4f3a-922f-55dfe70c54b6"
+            }
+          ],
+          "createdAt": "2026-07-28T00:52:10.000Z",
+          "updatedAt": "2026-07-28T00:52:10.000Z",
+          "uid": "35240-fa78b37a-9a26-4f42-8944-ae617c8066cd"
+        }
+      ],
+      "id": "4a04c2d6-f1e5-4f84-a4f2-2ced58bc7a42",
+      "createdAt": "2026-07-28T00:52:10.000Z",
+      "updatedAt": "2026-07-28T00:52:10.000Z",
+      "uid": "35240-4a04c2d6-f1e5-4f84-a4f2-2ced58bc7a42"
+    },
+    {
+      "name": "DescribeTable",
+      "item": [
+        {
+          "name": "Amazon Redshift Describe the Columns of a Table",
+          "id": "1200be7b-2b8e-4be8-ab11-b85c06d2c9a8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"Table\": \"<string>\",\n  \"Schema\": \"public\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/DescribeTable",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "DescribeTable"
+              ]
+            },
+            "description": "Describes the detailed information about a table and its columns. Returns column names, data types, and other metadata for a specified table."
+          },
+          "response": [
+            {
+              "id": "8288d25c-f457-46c8-b669-330c54b52976",
+              "name": "Table description retrieved successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"Table\": \"<string>\",\n  \"Schema\": \"public\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/DescribeTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DescribeTable"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"TableName\": \"<string>\",\n  \"ColumnList\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\",\n      \"typeName\": \"<string>\",\n      \"columnDefault\": \"<string>\",\n      \"isCaseSensitive\": \"<boolean>\",\n      \"isCurrency\": \"<boolean>\",\n      \"isSigned\": \"<boolean>\",\n      \"nullable\": 0,\n      \"precision\": \"<integer>\",\n      \"scale\": \"<integer>\",\n      \"length\": \"<integer>\",\n      \"schemaName\": \"<string>\",\n      \"tableName\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\",\n      \"typeName\": \"<string>\",\n      \"columnDefault\": \"<string>\",\n      \"isCaseSensitive\": \"<boolean>\",\n      \"isCurrency\": \"<boolean>\",\n      \"isSigned\": \"<boolean>\",\n      \"nullable\": 1,\n      \"precision\": \"<integer>\",\n      \"scale\": \"<integer>\",\n      \"length\": \"<integer>\",\n      \"schemaName\": \"<string>\",\n      \"tableName\": \"<string>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-8288d25c-f457-46c8-b669-330c54b52976"
+            },
+            {
+              "id": "9eefc320-fe6a-4847-827d-faedf26198fc",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"Table\": \"<string>\",\n  \"Schema\": \"public\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/DescribeTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DescribeTable"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-9eefc320-fe6a-4847-827d-faedf26198fc"
+            },
+            {
+              "id": "d97e7f99-d5dc-4ddb-bf65-6179821aba51",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"Table\": \"<string>\",\n  \"Schema\": \"public\",\n  \"MaxResults\": \"<integer>\",\n  \"NextToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/DescribeTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DescribeTable"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:10.000Z",
+              "updatedAt": "2026-07-28T00:52:10.000Z",
+              "uid": "35240-d97e7f99-d5dc-4ddb-bf65-6179821aba51"
+            }
+          ],
+          "createdAt": "2026-07-28T00:52:10.000Z",
+          "updatedAt": "2026-07-28T00:52:10.000Z",
+          "uid": "35240-1200be7b-2b8e-4be8-ab11-b85c06d2c9a8"
+        }
+      ],
+      "id": "335d427e-324f-4603-b79d-1a2dd69839aa",
+      "createdAt": "2026-07-28T00:52:10.000Z",
+      "updatedAt": "2026-07-28T00:52:10.000Z",
+      "uid": "35240-335d427e-324f-4603-b79d-1a2dd69839aa"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://redshift-data.{{region}}.amazonaws.com"
+    }
+  ]
+}

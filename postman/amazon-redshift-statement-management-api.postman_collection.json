@@ -1,0 +1,822 @@
+{
+  "info": {
+    "_postman_id": "1dde5d5c-7c55-4ac2-8df5-9bd36c517db7",
+    "name": "Amazon Redshift Data Metadata Statement Management API",
+    "description": "The Amazon Redshift Data API enables you to run SQL statements on Amazon Redshift clusters and Amazon Redshift Serverless workgroups without managing database connections or drivers. The Data API handles connection management, authentication via IAM or Secrets Manager, and supports asynchronous execution of SQL statements with result retrieval through a statement identifier. Ideal for building serverless applications, integrating with AWS Lambda, and running ad-hoc queries programmatically.\n\nContact Support:\n Name: Amazon Web Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:52:13.000Z",
+    "updatedAt": "2026-07-28T00:52:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1dde5d5c-7c55-4ac2-8df5-9bd36c517db7"
+  },
+  "item": [
+    {
+      "name": "DescribeStatement",
+      "item": [
+        {
+          "name": "Amazon Redshift Describe a Sql Statement Execution",
+          "id": "b91297a6-0944-454b-8b8a-459522726f79",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/DescribeStatement",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "DescribeStatement"
+              ]
+            },
+            "description": "Describes the details about a specific SQL statement run, including the status, duration, result size, and error information. Use the statement identifier returned by ExecuteStatement or BatchExecuteStatement to identify the statement."
+          },
+          "response": [
+            {
+              "id": "fcfe7fff-32e8-449f-a405-3550c282ad41",
+              "name": "Statement details retrieved successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/DescribeStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DescribeStatement"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Id\": \"<uuid>\",\n  \"Status\": \"ABORTED\",\n  \"CreatedAt\": \"<dateTime>\",\n  \"UpdatedAt\": \"<dateTime>\",\n  \"Duration\": \"<long>\",\n  \"QueryString\": \"<string>\",\n  \"QueryParameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"Database\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"WorkgroupName\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"RedshiftPid\": \"<long>\",\n  \"RedshiftQueryId\": \"<long>\",\n  \"ResultRows\": \"<long>\",\n  \"ResultSize\": \"<long>\",\n  \"HasResultSet\": \"<boolean>\",\n  \"Error\": \"<string>\",\n  \"SubStatements\": [\n    {\n      \"Id\": \"<string>\",\n      \"Status\": \"STARTED\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Duration\": \"<long>\",\n      \"QueryString\": \"<string>\",\n      \"RedshiftQueryId\": \"<long>\",\n      \"ResultRows\": \"<long>\",\n      \"ResultSize\": \"<long>\",\n      \"HasResultSet\": \"<boolean>\",\n      \"Error\": \"<string>\"\n    },\n    {\n      \"Id\": \"<string>\",\n      \"Status\": \"FINISHED\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Duration\": \"<long>\",\n      \"QueryString\": \"<string>\",\n      \"RedshiftQueryId\": \"<long>\",\n      \"ResultRows\": \"<long>\",\n      \"ResultSize\": \"<long>\",\n      \"HasResultSet\": \"<boolean>\",\n      \"Error\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-fcfe7fff-32e8-449f-a405-3550c282ad41"
+            },
+            {
+              "id": "84c3c74d-c595-4cde-aea4-3f5a36bca705",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/DescribeStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DescribeStatement"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-84c3c74d-c595-4cde-aea4-3f5a36bca705"
+            },
+            {
+              "id": "11d740c9-b962-4898-b630-86fdfb8deb2e",
+              "name": "Statement not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/DescribeStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DescribeStatement"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"ResourceId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-11d740c9-b962-4898-b630-86fdfb8deb2e"
+            },
+            {
+              "id": "91197a1d-b9a9-4325-9bbc-b45b343c7245",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/DescribeStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DescribeStatement"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-91197a1d-b9a9-4325-9bbc-b45b343c7245"
+            }
+          ],
+          "createdAt": "2026-07-28T00:52:14.000Z",
+          "updatedAt": "2026-07-28T00:52:14.000Z",
+          "uid": "35240-b91297a6-0944-454b-8b8a-459522726f79"
+        }
+      ],
+      "id": "9777d82c-7313-4067-9856-1ba6463f9c08",
+      "createdAt": "2026-07-28T00:52:14.000Z",
+      "updatedAt": "2026-07-28T00:52:14.000Z",
+      "uid": "35240-9777d82c-7313-4067-9856-1ba6463f9c08"
+    },
+    {
+      "name": "ListStatements",
+      "item": [
+        {
+          "name": "Amazon Redshift List Sql Statement Executions",
+          "id": "a291784f-c8f8-4177-80e5-2c1b68711fc0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"MaxResults\": 100,\n  \"NextToken\": \"<string>\",\n  \"RoleLevel\": false,\n  \"StatementName\": \"<string>\",\n  \"Status\": \"ALL\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ListStatements",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ListStatements"
+              ]
+            },
+            "description": "Lists SQL statements that have been submitted. By default, only finished statements are shown. You can filter by status and optionally include statements submitted by all IAM users by setting RoleLevel to true. Results are ordered by creation time, with the most recent statements listed first."
+          },
+          "response": [
+            {
+              "id": "b9f89cd6-abdf-452b-8a83-0466e4ae9ec3",
+              "name": "Statement list retrieved successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MaxResults\": 100,\n  \"NextToken\": \"<string>\",\n  \"RoleLevel\": false,\n  \"StatementName\": \"<string>\",\n  \"Status\": \"ALL\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListStatements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListStatements"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Statements\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"StatementName\": \"<string>\",\n      \"Status\": \"ABORTED\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"QueryString\": \"<string>\",\n      \"QueryParameters\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"Database\": \"<string>\",\n      \"ClusterIdentifier\": \"<string>\",\n      \"WorkgroupName\": \"<string>\",\n      \"SecretArn\": \"<string>\",\n      \"IsBatchStatement\": \"<boolean>\"\n    },\n    {\n      \"Id\": \"<uuid>\",\n      \"StatementName\": \"<string>\",\n      \"Status\": \"PICKED\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"QueryString\": \"<string>\",\n      \"QueryParameters\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"Database\": \"<string>\",\n      \"ClusterIdentifier\": \"<string>\",\n      \"WorkgroupName\": \"<string>\",\n      \"SecretArn\": \"<string>\",\n      \"IsBatchStatement\": \"<boolean>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-b9f89cd6-abdf-452b-8a83-0466e4ae9ec3"
+            },
+            {
+              "id": "ef767934-f06d-4258-9f9f-74480c33ad90",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MaxResults\": 100,\n  \"NextToken\": \"<string>\",\n  \"RoleLevel\": false,\n  \"StatementName\": \"<string>\",\n  \"Status\": \"ALL\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListStatements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListStatements"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-ef767934-f06d-4258-9f9f-74480c33ad90"
+            },
+            {
+              "id": "03642219-0a02-46e2-9f5f-e50b06f4c020",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MaxResults\": 100,\n  \"NextToken\": \"<string>\",\n  \"RoleLevel\": false,\n  \"StatementName\": \"<string>\",\n  \"Status\": \"ALL\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ListStatements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ListStatements"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-03642219-0a02-46e2-9f5f-e50b06f4c020"
+            }
+          ],
+          "createdAt": "2026-07-28T00:52:14.000Z",
+          "updatedAt": "2026-07-28T00:52:14.000Z",
+          "uid": "35240-a291784f-c8f8-4177-80e5-2c1b68711fc0"
+        }
+      ],
+      "id": "01f35ccd-9291-42d7-b033-1b74a12b1450",
+      "createdAt": "2026-07-28T00:52:14.000Z",
+      "updatedAt": "2026-07-28T00:52:14.000Z",
+      "uid": "35240-01f35ccd-9291-42d7-b033-1b74a12b1450"
+    },
+    {
+      "name": "CancelStatement",
+      "item": [
+        {
+          "name": "Amazon Redshift Cancel a Running Sql Statement",
+          "id": "65a3c46f-b85a-4548-a29f-dcb6871d615d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/CancelStatement",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "CancelStatement"
+              ]
+            },
+            "description": "Cancels a running SQL statement. The statement must be in the STARTED or SUBMITTED state to be cancelled."
+          },
+          "response": [
+            {
+              "id": "04bdea0e-3aff-47ec-a145-22c699531cfe",
+              "name": "Statement cancelled successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/CancelStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "CancelStatement"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Status\": \"<boolean>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-04bdea0e-3aff-47ec-a145-22c699531cfe"
+            },
+            {
+              "id": "b5aef452-99e2-467d-9d7c-da6ea2ee8c2e",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/CancelStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "CancelStatement"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-b5aef452-99e2-467d-9d7c-da6ea2ee8c2e"
+            },
+            {
+              "id": "4bed913e-8293-4827-a089-d4ea29d5df0a",
+              "name": "Statement not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/CancelStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "CancelStatement"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"ResourceId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-4bed913e-8293-4827-a089-d4ea29d5df0a"
+            },
+            {
+              "id": "0b05d4d4-de9a-484f-b135-c0e474fdff57",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/CancelStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "CancelStatement"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:52:14.000Z",
+              "updatedAt": "2026-07-28T00:52:14.000Z",
+              "uid": "35240-0b05d4d4-de9a-484f-b135-c0e474fdff57"
+            }
+          ],
+          "createdAt": "2026-07-28T00:52:14.000Z",
+          "updatedAt": "2026-07-28T00:52:14.000Z",
+          "uid": "35240-65a3c46f-b85a-4548-a29f-dcb6871d615d"
+        }
+      ],
+      "id": "fd48911c-d9df-4e8b-abdf-97f0a2d9dbd6",
+      "createdAt": "2026-07-28T00:52:14.000Z",
+      "updatedAt": "2026-07-28T00:52:14.000Z",
+      "uid": "35240-fd48911c-d9df-4e8b-abdf-97f0a2d9dbd6"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://redshift-data.{{region}}.amazonaws.com"
+    }
+  ]
+}

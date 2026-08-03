@@ -13,9 +13,10 @@
       "feed_url": "https://aws.amazon.com/redshift/pricing/",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     }
   ],
-  "post_count": 34,
-  "fetched": "2026-07-11T11:50:51Z"
+  "post_count": 35,
+  "fetched": "2026-08-01T15:38:58Z"
 }
