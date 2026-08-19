@@ -1,0 +1,574 @@
+{
+  "item": [
+    {
+      "id": "b9740142-c219-4136-a7cc-900afad4082a",
+      "name": "Statement Execution",
+      "description": {
+        "content": "Execute SQL statements against Amazon Redshift clusters or serverless workgroups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df753121-c052-4d3a-8c61-620788ecae8f",
+          "name": "Amazon Redshift Execute a Sql Statement",
+          "request": {
+            "name": "Amazon Redshift Execute a Sql Statement",
+            "description": {
+              "content": "Runs a SQL statement against an Amazon Redshift cluster or Amazon Redshift Serverless workgroup. The SQL statement runs asynchronously and returns a statement identifier that you can use to check the status with DescribeStatement and retrieve results with GetStatementResult. The maximum query result size is 100 MB.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExecuteStatement"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Database\": \"<string>\",\n  \"Sql\": \"<string>\",\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"StatementName\": \"<string>\",\n  \"WithEvent\": false,\n  \"WorkgroupName\": \"<string>\",\n  \"Parameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"ClientToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a62acfe9-b900-4449-83dc-6e36c57f868b",
+              "name": "Statement submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExecuteStatement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"dev\",\n  \"Sql\": \"SELECT * FROM sales ORDER BY sale_date DESC LIMIT 10\",\n  \"ClusterIdentifier\": \"my-redshift-cluster\",\n  \"DbUser\": \"example_value\",\n  \"SecretArn\": \"arn:aws:secretsmanager:us-east-1:123456789012:secret:my-redshift-secret-AbCdEf\",\n  \"StatementName\": \"my-sales-query\",\n  \"WithEvent\": true,\n  \"WorkgroupName\": \"my-workgroup\",\n  \"ClientToken\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"f0af2acc-7d0f-5815-e1c7-5ad203207faa\",\n  \"CreatedAt\": \"2026-01-15T10:30:00Z\",\n  \"Database\": \"example_value\",\n  \"DbUser\": \"example_value\",\n  \"ClusterIdentifier\": \"example_value\",\n  \"WorkgroupName\": \"example_value\",\n  \"SecretArn\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b9a33a8-7490-4c0d-b3cb-44a7144d63eb",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExecuteStatement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"dev\",\n  \"Sql\": \"SELECT * FROM sales ORDER BY sale_date DESC LIMIT 10\",\n  \"ClusterIdentifier\": \"my-redshift-cluster\",\n  \"DbUser\": \"example_value\",\n  \"SecretArn\": \"arn:aws:secretsmanager:us-east-1:123456789012:secret:my-redshift-secret-AbCdEf\",\n  \"StatementName\": \"my-sales-query\",\n  \"WithEvent\": true,\n  \"WorkgroupName\": \"my-workgroup\",\n  \"ClientToken\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2418b011-d0b3-45e8-be9b-eb722a2229e6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExecuteStatement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"dev\",\n  \"Sql\": \"SELECT * FROM sales ORDER BY sale_date DESC LIMIT 10\",\n  \"ClusterIdentifier\": \"my-redshift-cluster\",\n  \"DbUser\": \"example_value\",\n  \"SecretArn\": \"arn:aws:secretsmanager:us-east-1:123456789012:secret:my-redshift-secret-AbCdEf\",\n  \"StatementName\": \"my-sales-query\",\n  \"WithEvent\": true,\n  \"WorkgroupName\": \"my-workgroup\",\n  \"ClientToken\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9432312-13d5-467f-80f3-9b5758904576",
+              "name": "Service temporarily unavailable - the cluster is paused",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExecuteStatement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"dev\",\n  \"Sql\": \"SELECT * FROM sales ORDER BY sale_date DESC LIMIT 10\",\n  \"ClusterIdentifier\": \"my-redshift-cluster\",\n  \"DbUser\": \"example_value\",\n  \"SecretArn\": \"arn:aws:secretsmanager:us-east-1:123456789012:secret:my-redshift-secret-AbCdEf\",\n  \"StatementName\": \"my-sales-query\",\n  \"WithEvent\": true,\n  \"WorkgroupName\": \"my-workgroup\",\n  \"ClientToken\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95ff9152-3b87-4114-a583-b40fe5b8c57a",
+          "name": "Amazon Redshift Execute Multiple Sql Statements in a Batch",
+          "request": {
+            "name": "Amazon Redshift Execute Multiple Sql Statements in a Batch",
+            "description": {
+              "content": "Runs one or more SQL statements as a batch, which run as a single transaction. The statements run serially in the order provided. Returns a statement identifier for the batch that you can use with DescribeStatement and GetStatementResult.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "BatchExecuteStatement"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Database\": \"<string>\",\n  \"Sqls\": [\n    \"<string>\"\n  ],\n  \"ClusterIdentifier\": \"<string>\",\n  \"DbUser\": \"<string>\",\n  \"SecretArn\": \"<string>\",\n  \"StatementName\": \"<string>\",\n  \"WithEvent\": false,\n  \"WorkgroupName\": \"<string>\",\n  \"ClientToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62caed92-373d-4add-b3b6-9e3247de30fd",
+              "name": "Batch statement submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "BatchExecuteStatement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"example_value\",\n  \"Sqls\": [],\n  \"ClusterIdentifier\": \"example_value\",\n  \"DbUser\": \"example_value\",\n  \"SecretArn\": \"example_value\",\n  \"StatementName\": \"example_value\",\n  \"WithEvent\": true,\n  \"WorkgroupName\": \"example_value\",\n  \"ClientToken\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"32a96203-7f73-f42c-dd54-e3f23e46ac19\",\n  \"CreatedAt\": \"2026-01-15T10:30:00Z\",\n  \"Database\": \"example_value\",\n  \"DbUser\": \"example_value\",\n  \"ClusterIdentifier\": \"example_value\",\n  \"WorkgroupName\": \"example_value\",\n  \"SecretArn\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21f06c7b-a34e-4ce7-a1ba-a4265d216622",
+              "name": "Invalid request - validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "BatchExecuteStatement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"example_value\",\n  \"Sqls\": [],\n  \"ClusterIdentifier\": \"example_value\",\n  \"DbUser\": \"example_value\",\n  \"SecretArn\": \"example_value\",\n  \"StatementName\": \"example_value\",\n  \"WithEvent\": true,\n  \"WorkgroupName\": \"example_value\",\n  \"ClientToken\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfbe8710-3979-4f71-953f-7ad4da5540be",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "BatchExecuteStatement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Database\": \"example_value\",\n  \"Sqls\": [],\n  \"ClusterIdentifier\": \"example_value\",\n  \"DbUser\": \"example_value\",\n  \"SecretArn\": \"example_value\",\n  \"StatementName\": \"example_value\",\n  \"WithEvent\": true,\n  \"WorkgroupName\": \"example_value\",\n  \"ClientToken\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-central-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ca-central-1,sa-east-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://redshift-data.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2292b33e-e609-49a1-87d4-9b6eb3b7d417",
+    "name": "Amazon Redshift Data Metadata Statement Execution API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amazon Redshift Data API enables you to run SQL statements on Amazon Redshift clusters and Amazon Redshift Serverless workgroups without managing database connections or drivers. The Data API handles connection management, authentication via IAM or Secrets Manager, and supports asynchronous execution of SQL statements with result retrieval through a statement identifier. Ideal for building serverless applications, integrating with AWS Lambda, and running ad-hoc queries programmatically.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}

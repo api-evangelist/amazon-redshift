@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Redshift Data Metadata Statement Management API",
+    "version": "2019-12-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statement Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Redshift Describe a Sql Statement Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/DescribeStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes the details about a specific SQL statement run, including the status, duration, result size, and error information. Use the statement identifier returned by ExecuteStatement or BatchExecuteStatement to identify the statement."
+        },
+        {
+          "info": {
+            "name": "Amazon Redshift List Sql Statement Executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/ListStatements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists SQL statements that have been submitted. By default, only finished statements are shown. You can filter by status and optionally include statements submitted by all IAM users by setting RoleLevel to true. Results are ordered by creation time, with the most recent statements listed first."
+        },
+        {
+          "info": {
+            "name": "Amazon Redshift Cancel a Running Sql Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://redshift-data.{region}.amazonaws.com/CancelStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels a running SQL statement. The statement must be in the STARTED or SUBMITTED state to be cancelled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
