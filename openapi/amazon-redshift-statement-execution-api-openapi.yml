@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Redshift Data Metadata Statement Execution API
   description: The Amazon Redshift Data API enables you to run SQL statements on Amazon Redshift clusters and Amazon Redshift Serverless workgroups without managing database connections or drivers. The Data API handles connection management, authentication via IAM or Secrets Manager, and supports asynchronous execution of SQL statements with result retrieval through a statement identifier. Ideal for building serverless applications, integrating with AWS Lambda, and running ad-hoc queries programmatically.
@@ -115,20 +115,13 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SqlParameter:
+    ValidationException:
       type: object
-      required:
-      - name
-      - value
       properties:
-        name:
+        Message:
           type: string
-          description: The name of the parameter (without the colon prefix)
-          example: sale_date
-        value:
-          type: string
-          description: The value of the parameter
-          example: '2025-01-01'
+          description: A description of the validation error
+          example: example_value
     ActiveStatementsExceededException:
       type: object
       properties:
@@ -186,18 +179,18 @@ components:
           type: string
           description: A unique, case-sensitive identifier to ensure idempotency of the request.
           example: example_value
-    BatchExecuteStatementResponse:
+    ExecuteStatementResponse:
       type: object
       properties:
         Id:
           type: string
           format: uuid
-          description: The identifier of the batch SQL statement
+          description: The identifier of the SQL statement
           example: abc123
         CreatedAt:
           type: string
           format: date-time
-          description: The date and time the batch statement was created
+          description: The date and time the statement was created
           example: '2026-01-15T10:30:00Z'
         Database:
           type: string
@@ -219,13 +212,27 @@ components:
           type: string
           description: The secret ARN used for authentication
           example: example_value
-    ValidationException:
+    InternalServerException:
       type: object
       properties:
         Message:
           type: string
-          description: A description of the validation error
+          description: A description of the internal server error
           example: example_value
+    SqlParameter:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: The name of the parameter (without the colon prefix)
+          example: sale_date
+        value:
+          type: string
+          description: The value of the parameter
+          example: '2025-01-01'
     BatchExecuteStatementRequest:
       type: object
       required:
@@ -273,18 +280,18 @@ components:
           type: string
           description: Idempotency token
           example: example_value
-    ExecuteStatementResponse:
+    BatchExecuteStatementResponse:
       type: object
       properties:
         Id:
           type: string
           format: uuid
-          description: The identifier of the SQL statement
+          description: The identifier of the batch SQL statement
           example: abc123
         CreatedAt:
           type: string
           format: date-time
-          description: The date and time the statement was created
+          description: The date and time the batch statement was created
           example: '2026-01-15T10:30:00Z'
         Database:
           type: string
@@ -305,13 +312,6 @@ components:
         SecretArn:
           type: string
           description: The secret ARN used for authentication
-          example: example_value
-    InternalServerException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the internal server error
           example: example_value
   securitySchemes:
     sigv4Auth:

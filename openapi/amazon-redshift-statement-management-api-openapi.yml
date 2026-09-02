@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Redshift Data Metadata Statement Management API
   description: The Amazon Redshift Data API enables you to run SQL statements on Amazon Redshift clusters and Amazon Redshift Serverless workgroups without managing database connections or drivers. The Data API handles connection management, authentication via IAM or Secrets Manager, and supports asynchronous execution of SQL statements with result retrieval through a statement identifier. Ideal for building serverless applications, integrating with AWS Lambda, and running ad-hoc queries programmatically.
@@ -156,6 +156,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the validation error
+          example: example_value
+    ListStatementsResponse:
+      type: object
+      required:
+      - Statements
+      properties:
+        Statements:
+          type: array
+          description: List of SQL statements
+          items:
+            $ref: '#/components/schemas/StatementData'
+          example: []
+        NextToken:
+          type: string
+          description: A pagination token to retrieve the next set of results. Null if there are no more results.
+          example: example_value
     CancelStatementResponse:
       type: object
       properties:
@@ -163,30 +185,41 @@ components:
           type: boolean
           description: Whether the cancel request was successful
           example: true
-    SqlParameter:
+    ListStatementsRequest:
       type: object
-      required:
-      - name
-      - value
       properties:
-        name:
+        MaxResults:
+          type: integer
+          description: The maximum number of SQL statements to return in the response. Valid range is 0 to 100. Default is 100.
+          minimum: 0
+          maximum: 100
+          default: 100
+          example: 10
+        NextToken:
           type: string
-          description: The name of the parameter (without the colon prefix)
-          example: sale_date
-        value:
+          description: A value that indicates the starting point for the next set of response records in a subsequent request.
+          example: example_value
+        RoleLevel:
+          type: boolean
+          description: When true, returns statements submitted by all IAM users in the account. Default is false, which returns only statements from the calling user.
+          default: false
+          example: true
+        StatementName:
           type: string
-          description: The value of the parameter
-          example: '2025-01-01'
-    CancelStatementRequest:
-      type: object
-      required:
-      - Id
-      properties:
-        Id:
+          description: Filter results by a specific statement name
+          example: example_value
+        Status:
           type: string
-          format: uuid
-          description: The identifier of the SQL statement to cancel
-          example: abc123
+          description: Filter results by statement status
+          enum:
+          - SUBMITTED
+          - PICKED
+          - STARTED
+          - FINISHED
+          - ABORTED
+          - FAILED
+          - ALL
+          example: SUBMITTED
     SubStatementData:
       type: object
       required:
@@ -249,38 +282,12 @@ components:
           type: string
           description: The error message if the sub-statement failed
           example: example_value
-    ResourceNotFoundException:
+    InternalServerException:
       type: object
       properties:
         Message:
           type: string
-          description: A description of the resource not found error
-          example: example_value
-        ResourceId:
-          type: string
-          description: The identifier of the resource that was not found
-          example: '500123'
-    ListStatementsResponse:
-      type: object
-      required:
-      - Statements
-      properties:
-        Statements:
-          type: array
-          description: List of SQL statements
-          items:
-            $ref: '#/components/schemas/StatementData'
-          example: []
-        NextToken:
-          type: string
-          description: A pagination token to retrieve the next set of results. Null if there are no more results.
-          example: example_value
-    ValidationException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the validation error
+          description: A description of the internal server error
           example: example_value
     StatementData:
       type: object
@@ -445,6 +452,20 @@ components:
           items:
             $ref: '#/components/schemas/SubStatementData'
           example: []
+    SqlParameter:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: The name of the parameter (without the colon prefix)
+          example: sale_date
+        value:
+          type: string
+          description: The value of the parameter
+          example: '2025-01-01'
     DescribeStatementRequest:
       type: object
       required:
@@ -455,48 +476,27 @@ components:
           format: uuid
           description: The identifier of the SQL statement to describe. This value is returned by ExecuteStatement or BatchExecuteStatement.
           example: c016234e-5c6c-4bc5-bb66-2c776b0e92db
-    InternalServerException:
+    ResourceNotFoundException:
       type: object
       properties:
         Message:
           type: string
-          description: A description of the internal server error
+          description: A description of the resource not found error
           example: example_value
-    ListStatementsRequest:
+        ResourceId:
+          type: string
+          description: The identifier of the resource that was not found
+          example: '500123'
+    CancelStatementRequest:
       type: object
+      required:
+      - Id
       properties:
-        MaxResults:
-          type: integer
-          description: The maximum number of SQL statements to return in the response. Valid range is 0 to 100. Default is 100.
-          minimum: 0
-          maximum: 100
-          default: 100
-          example: 10
-        NextToken:
+        Id:
           type: string
-          description: A value that indicates the starting point for the next set of response records in a subsequent request.
-          example: example_value
-        RoleLevel:
-          type: boolean
-          description: When true, returns statements submitted by all IAM users in the account. Default is false, which returns only statements from the calling user.
-          default: false
-          example: true
-        StatementName:
-          type: string
-          description: Filter results by a specific statement name
-          example: example_value
-        Status:
-          type: string
-          description: Filter results by statement status
-          enum:
-          - SUBMITTED
-          - PICKED
-          - STARTED
-          - FINISHED
-          - ABORTED
-          - FAILED
-          - ALL
-          example: SUBMITTED
+          format: uuid
+          description: The identifier of the SQL statement to cancel
+          example: abc123
   securitySchemes:
     sigv4Auth:
       type: apiKey
