@@ -196,6 +196,208 @@ components:
           type: string
           description: Pagination token for the next page
           example: example_value
+    TableMember:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the table
+          example: Example Title
+        type:
+          type: string
+          description: The type of the table (TABLE, VIEW, etc.)
+          example: example_value
+        schema:
+          type: string
+          description: The schema that contains the table
+          example: example_value
+    ListDatabasesResponse:
+      type: object
+      properties:
+        Databases:
+          type: array
+          description: List of database names
+          items:
+            type: string
+          example: []
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ListTablesRequest:
+      type: object
+      required:
+      - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        Database:
+          type: string
+          description: The name of the database containing the tables
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+          example: example_value
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SchemaPattern:
+          type: string
+          description: A schema name pattern to filter tables
+          example: example_value
+        TablePattern:
+          type: string
+          description: A table name pattern to filter tables
+          example: sales%
+        MaxResults:
+          type: integer
+          description: Maximum number of tables to return
+          minimum: 0
+          maximum: 1000
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ListDatabasesRequest:
+      type: object
+      required:
+      - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        Database:
+          type: string
+          description: The name of the database to use for connection. For provisioned clusters this is typically 'dev'.
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+          example: example_value
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        MaxResults:
+          type: integer
+          description: Maximum number of databases to return
+          minimum: 0
+          maximum: 1000
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ListSchemasRequest:
+      type: object
+      required:
+      - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        Database:
+          type: string
+          description: The name of the database containing the schemas
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+          example: example_value
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SchemaPattern:
+          type: string
+          description: A pattern to filter schemas. Uses SQL LIKE syntax where underscore matches one character and percent matches zero or more characters.
+          example: public%
+        MaxResults:
+          type: integer
+          description: Maximum number of schemas to return
+          minimum: 0
+          maximum: 1000
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    DescribeTableRequest:
+      type: object
+      required:
+      - Database
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        Database:
+          type: string
+          description: The name of the database
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user for temporary credentials
+          example: example_value
+        SecretArn:
+          type: string
+          description: ARN of the secret in Secrets Manager
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        Table:
+          type: string
+          description: The table name. Can be qualified with schema name as schema_name.table_name.
+          example: public.sales
+        Schema:
+          type: string
+          description: The schema that contains the table. Default is public.
+          default: public
+          example: example_value
+        MaxResults:
+          type: integer
+          description: Maximum number of columns to return
+          minimum: 0
+          maximum: 1000
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
+    ListTablesResponse:
+      type: object
+      properties:
+        Tables:
+          type: array
+          description: List of tables
+          items:
+            $ref: '#/components/schemas/TableMember'
+          example: []
+        NextToken:
+          type: string
+          description: Pagination token for the next page
+          example: example_value
     ColumnMetadata:
       type: object
       properties:
@@ -255,178 +457,6 @@ components:
           type: string
           description: The name of the table that contains the column
           example: example_value
-    ValidationException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the validation error
-          example: example_value
-    ListDatabasesRequest:
-      type: object
-      required:
-      - Database
-      properties:
-        ClusterIdentifier:
-          type: string
-          description: The cluster identifier
-          example: example_value
-        Database:
-          type: string
-          description: The name of the database to use for connection. For provisioned clusters this is typically 'dev'.
-          example: example_value
-        DbUser:
-          type: string
-          description: The database user for temporary credentials
-          example: example_value
-        SecretArn:
-          type: string
-          description: ARN of the secret in Secrets Manager
-          example: example_value
-        WorkgroupName:
-          type: string
-          description: The serverless workgroup name
-          example: example_value
-        MaxResults:
-          type: integer
-          description: Maximum number of databases to return
-          minimum: 0
-          maximum: 1000
-          example: 10
-        NextToken:
-          type: string
-          description: Pagination token for the next page
-          example: example_value
-    ListTablesResponse:
-      type: object
-      properties:
-        Tables:
-          type: array
-          description: List of tables
-          items:
-            $ref: '#/components/schemas/TableMember'
-          example: []
-        NextToken:
-          type: string
-          description: Pagination token for the next page
-          example: example_value
-    InternalServerException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the internal server error
-          example: example_value
-    ListDatabasesResponse:
-      type: object
-      properties:
-        Databases:
-          type: array
-          description: List of database names
-          items:
-            type: string
-          example: []
-        NextToken:
-          type: string
-          description: Pagination token for the next page
-          example: example_value
-    ListSchemasRequest:
-      type: object
-      required:
-      - Database
-      properties:
-        ClusterIdentifier:
-          type: string
-          description: The cluster identifier
-          example: example_value
-        Database:
-          type: string
-          description: The name of the database containing the schemas
-          example: example_value
-        DbUser:
-          type: string
-          description: The database user for temporary credentials
-          example: example_value
-        SecretArn:
-          type: string
-          description: ARN of the secret in Secrets Manager
-          example: example_value
-        WorkgroupName:
-          type: string
-          description: The serverless workgroup name
-          example: example_value
-        SchemaPattern:
-          type: string
-          description: A pattern to filter schemas. Uses SQL LIKE syntax where underscore matches one character and percent matches zero or more characters.
-          example: public%
-        MaxResults:
-          type: integer
-          description: Maximum number of schemas to return
-          minimum: 0
-          maximum: 1000
-          example: 10
-        NextToken:
-          type: string
-          description: Pagination token for the next page
-          example: example_value
-    TableMember:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the table
-          example: Example Title
-        type:
-          type: string
-          description: The type of the table (TABLE, VIEW, etc.)
-          example: example_value
-        schema:
-          type: string
-          description: The schema that contains the table
-          example: example_value
-    ListTablesRequest:
-      type: object
-      required:
-      - Database
-      properties:
-        ClusterIdentifier:
-          type: string
-          description: The cluster identifier
-          example: example_value
-        Database:
-          type: string
-          description: The name of the database containing the tables
-          example: example_value
-        DbUser:
-          type: string
-          description: The database user for temporary credentials
-          example: example_value
-        SecretArn:
-          type: string
-          description: ARN of the secret in Secrets Manager
-          example: example_value
-        WorkgroupName:
-          type: string
-          description: The serverless workgroup name
-          example: example_value
-        SchemaPattern:
-          type: string
-          description: A schema name pattern to filter tables
-          example: example_value
-        TablePattern:
-          type: string
-          description: A table name pattern to filter tables
-          example: sales%
-        MaxResults:
-          type: integer
-          description: Maximum number of tables to return
-          minimum: 0
-          maximum: 1000
-          example: 10
-        NextToken:
-          type: string
-          description: Pagination token for the next page
-          example: example_value
     ListSchemasResponse:
       type: object
       properties:
@@ -440,49 +470,19 @@ components:
           type: string
           description: Pagination token for the next page
           example: example_value
-    DescribeTableRequest:
+    ValidationException:
       type: object
-      required:
-      - Database
       properties:
-        ClusterIdentifier:
+        Message:
           type: string
-          description: The cluster identifier
+          description: A description of the validation error
           example: example_value
-        Database:
+    InternalServerException:
+      type: object
+      properties:
+        Message:
           type: string
-          description: The name of the database
-          example: example_value
-        DbUser:
-          type: string
-          description: The database user for temporary credentials
-          example: example_value
-        SecretArn:
-          type: string
-          description: ARN of the secret in Secrets Manager
-          example: example_value
-        WorkgroupName:
-          type: string
-          description: The serverless workgroup name
-          example: example_value
-        Table:
-          type: string
-          description: The table name. Can be qualified with schema name as schema_name.table_name.
-          example: public.sales
-        Schema:
-          type: string
-          description: The schema that contains the table. Default is public.
-          default: public
-          example: example_value
-        MaxResults:
-          type: integer
-          description: Maximum number of columns to return
-          minimum: 0
-          maximum: 1000
-          example: 10
-        NextToken:
-          type: string
-          description: Pagination token for the next page
+          description: A description of the internal server error
           example: example_value
   securitySchemes:
     sigv4Auth:
