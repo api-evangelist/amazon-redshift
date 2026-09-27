@@ -80,34 +80,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GetStatementResultResponse:
+    Field:
       type: object
-      required:
-      - Records
+      description: A single value in a result row. Exactly one of the typed properties will be present, corresponding to the column data type.
       properties:
-        Records:
-          type: array
-          description: The results of the SQL statement as an array of rows
-          items:
-            type: array
-            description: A single row of results
-            items:
-              $ref: '#/components/schemas/Field'
-          example: []
-        ColumnMetadata:
-          type: array
-          description: Metadata about the columns in the result set
-          items:
-            $ref: '#/components/schemas/ColumnMetadata'
-          example: []
-        TotalNumRows:
+        blobValue:
+          type: string
+          format: byte
+          description: A value in binary format
+          example: example_value
+        booleanValue:
+          type: boolean
+          description: A boolean value
+          example: true
+        doubleValue:
+          type: number
+          format: double
+          description: A double-precision floating point value
+          example: 42.5
+        isNull:
+          type: boolean
+          description: Whether the value is null
+          example: true
+        longValue:
           type: integer
           format: int64
-          description: Total number of rows in the result set
+          description: A long integer value
           example: 10
-        NextToken:
+        stringValue:
           type: string
-          description: Pagination token for the next page of results
+          description: A string value
           example: example_value
     ColumnMetadata:
       type: object
@@ -168,6 +170,42 @@ components:
           type: string
           description: The name of the table that contains the column
           example: example_value
+    GetStatementResultResponse:
+      type: object
+      required:
+      - Records
+      properties:
+        Records:
+          type: array
+          description: The results of the SQL statement as an array of rows
+          items:
+            type: array
+            description: A single row of results
+            items:
+              $ref: '#/components/schemas/Field'
+          example: []
+        ColumnMetadata:
+          type: array
+          description: Metadata about the columns in the result set
+          items:
+            $ref: '#/components/schemas/ColumnMetadata'
+          example: []
+        TotalNumRows:
+          type: integer
+          format: int64
+          description: Total number of rows in the result set
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page of results
+          example: example_value
+    InternalServerException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the internal server error
+          example: example_value
     GetStatementResultRequest:
       type: object
       required:
@@ -199,44 +237,6 @@ components:
         Message:
           type: string
           description: A description of the validation error
-          example: example_value
-    InternalServerException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the internal server error
-          example: example_value
-    Field:
-      type: object
-      description: A single value in a result row. Exactly one of the typed properties will be present, corresponding to the column data type.
-      properties:
-        blobValue:
-          type: string
-          format: byte
-          description: A value in binary format
-          example: example_value
-        booleanValue:
-          type: boolean
-          description: A boolean value
-          example: true
-        doubleValue:
-          type: number
-          format: double
-          description: A double-precision floating point value
-          example: 42.5
-        isNull:
-          type: boolean
-          description: Whether the value is null
-          example: true
-        longValue:
-          type: integer
-          format: int64
-          description: A long integer value
-          example: 10
-        stringValue:
-          type: string
-          description: A string value
           example: example_value
   securitySchemes:
     sigv4Auth:

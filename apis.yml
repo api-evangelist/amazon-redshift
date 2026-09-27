@@ -39,7 +39,7 @@ tags:
 - Data Lake
 - Data Warehouse
 - ETL
-- Machine-Learning
+- Machine Learning
 - Serverless
 - SQL
 tags_raw:
@@ -52,9 +52,11 @@ tags_raw:
 - Machine Learning
 - Serverless
 - SQL
+- Machine-Learning
 apis:
 - name: Amazon Redshift Serverless API
-  description: The Amazon Redshift Serverless API for managing serverless data warehouse workgroups, namespaces,
+  description: >-
+    The Amazon Redshift Serverless API for managing serverless data warehouse workgroups, namespaces,
     and capacity without provisioning clusters.
   image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
   humanURL: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html
@@ -70,7 +72,8 @@ apis:
   - type: APIReference
     url: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/Welcome.html
   - type: SDKs
-    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-serverless.html
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-serverless.html
     title: Python SDK
   - type: SDKs
     url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-serverless/
@@ -122,7 +125,8 @@ apis:
   - type: APIReference
     url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
   - type: SDKs
-    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
   - type: SDKs
     url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
   - type: CLI
@@ -170,7 +174,8 @@ apis:
   - type: APIReference
     url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
   - type: SDKs
-    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
   - type: SDKs
     url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
   - type: CLI
@@ -218,7 +223,8 @@ apis:
   - type: APIReference
     url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
   - type: SDKs
-    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
   - type: SDKs
     url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
   - type: CLI
@@ -266,16 +272,31 @@ apis:
   - type: APIReference
     url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
   - type: SDKs
-    url: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
+    url: >-
+      https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift-data.html
   - type: SDKs
     url: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/redshift-data/
   - type: CLI
     url: https://docs.aws.amazon.com/cli/latest/reference/redshift-data/
   - type: GettingStarted
     url: https://aws.amazon.com/blogs/big-data/get-started-with-the-amazon-redshift-data-api/
+- aid: amazon-redshift:amazon-redshift-amazon-redshift-api
+  name: Amazon Redshift Amazon Redshift API
+  description: The Amazon Redshift API from Amazon Redshift — 119 operation(s) for amazon redshift.
+  humanURL: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html
+  baseURL: https://redshift-serverless.amazonaws.com
+  tags:
+  - Amazon Redshift
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-redshift-amazon-redshift-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift/latest/APIReference/Welcome.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
 common:
 - type: Website
-  url: https://amazon.com
+  url: https://aws.amazon.com/redshift/
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amazon-redshift/overview
 - type: AgenticAccess
@@ -373,5 +394,5 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
   url: https://apievangelist.com
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product

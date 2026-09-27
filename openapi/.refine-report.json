@@ -1,21 +1,25 @@
 {
   "provider": "amazon-redshift",
   "sources": [
-    "_original/amazon-redshift-data-api-openapi.yml"
+    "_original/amazon-redshift-data-api-openapi.yml",
+    "aws-redshift-amazon-redshift-api-openapi.yml"
   ],
   "outputs": [
     "amazon-redshift-metadata-api-openapi.yml",
     "amazon-redshift-result-retrieval-api-openapi.yml",
     "amazon-redshift-statement-execution-api-openapi.yml",
-    "amazon-redshift-statement-management-api-openapi.yml"
+    "amazon-redshift-statement-management-api-openapi.yml",
+    "amazon-redshift-amazon-redshift-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "archived openapi/aws-redshift-amazon-redshift-api-openapi.yml"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "amazon-redshift-data-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+1 apis, 6 total)"
   ],
   "skipped": [
     "amazon-redshift-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
