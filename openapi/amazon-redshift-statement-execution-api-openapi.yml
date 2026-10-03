@@ -115,60 +115,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SqlParameter:
-      type: object
-      required:
-      - name
-      - value
-      properties:
-        name:
-          type: string
-          description: The name of the parameter (without the colon prefix)
-          example: sale_date
-        value:
-          type: string
-          description: The value of the parameter
-          example: '2025-01-01'
-    BatchExecuteStatementResponse:
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          description: The identifier of the batch SQL statement
-          example: abc123
-        CreatedAt:
-          type: string
-          format: date-time
-          description: The date and time the batch statement was created
-          example: '2026-01-15T10:30:00Z'
-        Database:
-          type: string
-          description: The name of the database
-          example: example_value
-        DbUser:
-          type: string
-          description: The database user
-          example: example_value
-        ClusterIdentifier:
-          type: string
-          description: The cluster identifier
-          example: example_value
-        WorkgroupName:
-          type: string
-          description: The serverless workgroup name
-          example: example_value
-        SecretArn:
-          type: string
-          description: The secret ARN used for authentication
-          example: example_value
-    ActiveStatementsExceededException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description indicating the maximum number of active statements has been exceeded
-          example: example_value
     ExecuteStatementResponse:
       type: object
       properties:
@@ -208,6 +154,96 @@ components:
         Message:
           type: string
           description: A description of the internal server error
+          example: example_value
+    BatchExecuteStatementResponse:
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the batch SQL statement
+          example: abc123
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the batch statement was created
+          example: '2026-01-15T10:30:00Z'
+        Database:
+          type: string
+          description: The name of the database
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user
+          example: example_value
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SecretArn:
+          type: string
+          description: The secret ARN used for authentication
+          example: example_value
+    ExecuteStatementRequest:
+      type: object
+      required:
+      - Database
+      - Sql
+      properties:
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier. Required when connecting to a provisioned cluster. Mutually exclusive with WorkgroupName.
+          example: my-redshift-cluster
+        Database:
+          type: string
+          description: The name of the database to run the SQL statement against
+          example: dev
+        DbUser:
+          type: string
+          description: The database user name. Required when authenticating with temporary credentials from GetClusterCredentials.
+          example: example_value
+        SecretArn:
+          type: string
+          description: The ARN of the secret stored in AWS Secrets Manager that contains the database credentials. Mutually exclusive with DbUser and temporary credentials.
+          example: arn:aws:secretsmanager:us-east-1:123456789012:secret:my-redshift-secret-AbCdEf
+        Sql:
+          type: string
+          description: The SQL statement to run. Maximum length is 100,000 characters.
+          maxLength: 100000
+          example: SELECT * FROM sales ORDER BY sale_date DESC LIMIT 10
+        StatementName:
+          type: string
+          description: A name for the SQL statement. This name can be used to identify the query in the ListStatements output.
+          example: my-sales-query
+        WithEvent:
+          type: boolean
+          description: Whether to send an event to Amazon EventBridge when the SQL statement completes. Default is false.
+          default: false
+          example: true
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name. Required when connecting to Redshift Serverless. Mutually exclusive with ClusterIdentifier.
+          example: my-workgroup
+        Parameters:
+          type: array
+          description: Named parameters for the SQL statement. Use :name syntax in the SQL string to reference parameters.
+          items:
+            $ref: '#/components/schemas/SqlParameter'
+          example: []
+        ClientToken:
+          type: string
+          description: A unique, case-sensitive identifier to ensure idempotency of the request.
+          example: example_value
+    ActiveStatementsExceededException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description indicating the maximum number of active statements has been exceeded
           example: example_value
     ValidationException:
       type: object
@@ -263,56 +299,20 @@ components:
           type: string
           description: Idempotency token
           example: example_value
-    ExecuteStatementRequest:
+    SqlParameter:
       type: object
       required:
-      - Database
-      - Sql
+      - name
+      - value
       properties:
-        ClusterIdentifier:
+        name:
           type: string
-          description: The cluster identifier. Required when connecting to a provisioned cluster. Mutually exclusive with WorkgroupName.
-          example: my-redshift-cluster
-        Database:
+          description: The name of the parameter (without the colon prefix)
+          example: sale_date
+        value:
           type: string
-          description: The name of the database to run the SQL statement against
-          example: dev
-        DbUser:
-          type: string
-          description: The database user name. Required when authenticating with temporary credentials from GetClusterCredentials.
-          example: example_value
-        SecretArn:
-          type: string
-          description: The ARN of the secret stored in AWS Secrets Manager that contains the database credentials. Mutually exclusive with DbUser and temporary credentials.
-          example: arn:aws:secretsmanager:us-east-1:123456789012:secret:my-redshift-secret-AbCdEf
-        Sql:
-          type: string
-          description: The SQL statement to run. Maximum length is 100,000 characters.
-          maxLength: 100000
-          example: SELECT * FROM sales ORDER BY sale_date DESC LIMIT 10
-        StatementName:
-          type: string
-          description: A name for the SQL statement. This name can be used to identify the query in the ListStatements output.
-          example: my-sales-query
-        WithEvent:
-          type: boolean
-          description: Whether to send an event to Amazon EventBridge when the SQL statement completes. Default is false.
-          default: false
-          example: true
-        WorkgroupName:
-          type: string
-          description: The serverless workgroup name. Required when connecting to Redshift Serverless. Mutually exclusive with ClusterIdentifier.
-          example: my-workgroup
-        Parameters:
-          type: array
-          description: Named parameters for the SQL statement. Use :name syntax in the SQL string to reference parameters.
-          items:
-            $ref: '#/components/schemas/SqlParameter'
-          example: []
-        ClientToken:
-          type: string
-          description: A unique, case-sensitive identifier to ensure idempotency of the request.
-          example: example_value
+          description: The value of the parameter
+          example: '2025-01-01'
   securitySchemes:
     sigv4Auth:
       type: apiKey
