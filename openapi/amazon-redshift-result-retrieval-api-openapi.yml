@@ -80,42 +80,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GetStatementResultResponse:
-      type: object
-      required:
-      - Records
-      properties:
-        Records:
-          type: array
-          description: The results of the SQL statement as an array of rows
-          items:
-            type: array
-            description: A single row of results
-            items:
-              $ref: '#/components/schemas/Field'
-          example: []
-        ColumnMetadata:
-          type: array
-          description: Metadata about the columns in the result set
-          items:
-            $ref: '#/components/schemas/ColumnMetadata'
-          example: []
-        TotalNumRows:
-          type: integer
-          format: int64
-          description: Total number of rows in the result set
-          example: 10
-        NextToken:
-          type: string
-          description: Pagination token for the next page of results
-          example: example_value
-    InternalServerException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the internal server error
-          example: example_value
     Field:
       type: object
       description: A single value in a result row. Exactly one of the typed properties will be present, corresponding to the column data type.
@@ -147,6 +111,13 @@ components:
           type: string
           description: A string value
           example: example_value
+    InternalServerException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the internal server error
+          example: example_value
     GetStatementResultRequest:
       type: object
       required:
@@ -160,6 +131,46 @@ components:
         NextToken:
           type: string
           description: A pagination token for the next page of results
+          example: example_value
+    ResourceNotFoundException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the resource not found error
+          example: example_value
+        ResourceId:
+          type: string
+          description: The identifier of the resource that was not found
+          example: '500123'
+    GetStatementResultResponse:
+      type: object
+      required:
+      - Records
+      properties:
+        Records:
+          type: array
+          description: The results of the SQL statement as an array of rows
+          items:
+            type: array
+            description: A single row of results
+            items:
+              $ref: '#/components/schemas/Field'
+          example: []
+        ColumnMetadata:
+          type: array
+          description: Metadata about the columns in the result set
+          items:
+            $ref: '#/components/schemas/ColumnMetadata'
+          example: []
+        TotalNumRows:
+          type: integer
+          format: int64
+          description: Total number of rows in the result set
+          example: 10
+        NextToken:
+          type: string
+          description: Pagination token for the next page of results
           example: example_value
     ValidationException:
       type: object
@@ -227,17 +238,6 @@ components:
           type: string
           description: The name of the table that contains the column
           example: example_value
-    ResourceNotFoundException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the resource not found error
-          example: example_value
-        ResourceId:
-          type: string
-          description: The identifier of the resource that was not found
-          example: '500123'
   securitySchemes:
     sigv4Auth:
       type: apiKey

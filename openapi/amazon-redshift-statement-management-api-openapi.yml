@@ -156,70 +156,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CancelStatementResponse:
-      type: object
-      properties:
-        Status:
-          type: boolean
-          description: Whether the cancel request was successful
-          example: true
-    InternalServerException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the internal server error
-          example: example_value
-    ListStatementsRequest:
-      type: object
-      properties:
-        MaxResults:
-          type: integer
-          description: The maximum number of SQL statements to return in the response. Valid range is 0 to 100. Default is 100.
-          minimum: 0
-          maximum: 100
-          default: 100
-          example: 10
-        NextToken:
-          type: string
-          description: A value that indicates the starting point for the next set of response records in a subsequent request.
-          example: example_value
-        RoleLevel:
-          type: boolean
-          description: When true, returns statements submitted by all IAM users in the account. Default is false, which returns only statements from the calling user.
-          default: false
-          example: true
-        StatementName:
-          type: string
-          description: Filter results by a specific statement name
-          example: example_value
-        Status:
-          type: string
-          description: Filter results by statement status
-          enum:
-          - SUBMITTED
-          - PICKED
-          - STARTED
-          - FINISHED
-          - ABORTED
-          - FAILED
-          - ALL
-          example: SUBMITTED
-    ListStatementsResponse:
-      type: object
-      required:
-      - Statements
-      properties:
-        Statements:
-          type: array
-          description: List of SQL statements
-          items:
-            $ref: '#/components/schemas/StatementData'
-          example: []
-        NextToken:
-          type: string
-          description: A pagination token to retrieve the next set of results. Null if there are no more results.
-          example: example_value
     SubStatementData:
       type: object
       required:
@@ -282,7 +218,42 @@ components:
           type: string
           description: The error message if the sub-statement failed
           example: example_value
-    DescribeStatementRequest:
+    ListStatementsRequest:
+      type: object
+      properties:
+        MaxResults:
+          type: integer
+          description: The maximum number of SQL statements to return in the response. Valid range is 0 to 100. Default is 100.
+          minimum: 0
+          maximum: 100
+          default: 100
+          example: 10
+        NextToken:
+          type: string
+          description: A value that indicates the starting point for the next set of response records in a subsequent request.
+          example: example_value
+        RoleLevel:
+          type: boolean
+          description: When true, returns statements submitted by all IAM users in the account. Default is false, which returns only statements from the calling user.
+          default: false
+          example: true
+        StatementName:
+          type: string
+          description: Filter results by a specific statement name
+          example: example_value
+        Status:
+          type: string
+          description: Filter results by statement status
+          enum:
+          - SUBMITTED
+          - PICKED
+          - STARTED
+          - FINISHED
+          - ABORTED
+          - FAILED
+          - ALL
+          example: SUBMITTED
+    CancelStatementRequest:
       type: object
       required:
       - Id
@@ -290,14 +261,14 @@ components:
         Id:
           type: string
           format: uuid
-          description: The identifier of the SQL statement to describe. This value is returned by ExecuteStatement or BatchExecuteStatement.
-          example: c016234e-5c6c-4bc5-bb66-2c776b0e92db
-    ValidationException:
+          description: The identifier of the SQL statement to cancel
+          example: abc123
+    InternalServerException:
       type: object
       properties:
         Message:
           type: string
-          description: A description of the validation error
+          description: A description of the internal server error
           example: example_value
     DescribeStatementResponse:
       type: object
@@ -462,6 +433,56 @@ components:
           type: boolean
           description: Whether this is a batch statement
           example: true
+    ResourceNotFoundException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the resource not found error
+          example: example_value
+        ResourceId:
+          type: string
+          description: The identifier of the resource that was not found
+          example: '500123'
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the validation error
+          example: example_value
+    CancelStatementResponse:
+      type: object
+      properties:
+        Status:
+          type: boolean
+          description: Whether the cancel request was successful
+          example: true
+    ListStatementsResponse:
+      type: object
+      required:
+      - Statements
+      properties:
+        Statements:
+          type: array
+          description: List of SQL statements
+          items:
+            $ref: '#/components/schemas/StatementData'
+          example: []
+        NextToken:
+          type: string
+          description: A pagination token to retrieve the next set of results. Null if there are no more results.
+          example: example_value
+    DescribeStatementRequest:
+      type: object
+      required:
+      - Id
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the SQL statement to describe. This value is returned by ExecuteStatement or BatchExecuteStatement.
+          example: c016234e-5c6c-4bc5-bb66-2c776b0e92db
     SqlParameter:
       type: object
       required:
@@ -476,27 +497,6 @@ components:
           type: string
           description: The value of the parameter
           example: '2025-01-01'
-    ResourceNotFoundException:
-      type: object
-      properties:
-        Message:
-          type: string
-          description: A description of the resource not found error
-          example: example_value
-        ResourceId:
-          type: string
-          description: The identifier of the resource that was not found
-          example: '500123'
-    CancelStatementRequest:
-      type: object
-      required:
-      - Id
-      properties:
-        Id:
-          type: string
-          format: uuid
-          description: The identifier of the SQL statement to cancel
-          example: abc123
   securitySchemes:
     sigv4Auth:
       type: apiKey

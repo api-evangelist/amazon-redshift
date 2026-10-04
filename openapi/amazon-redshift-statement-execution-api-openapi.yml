@@ -115,78 +115,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ExecuteStatementResponse:
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          description: The identifier of the SQL statement
-          example: abc123
-        CreatedAt:
-          type: string
-          format: date-time
-          description: The date and time the statement was created
-          example: '2026-01-15T10:30:00Z'
-        Database:
-          type: string
-          description: The name of the database
-          example: example_value
-        DbUser:
-          type: string
-          description: The database user
-          example: example_value
-        ClusterIdentifier:
-          type: string
-          description: The cluster identifier
-          example: example_value
-        WorkgroupName:
-          type: string
-          description: The serverless workgroup name
-          example: example_value
-        SecretArn:
-          type: string
-          description: The secret ARN used for authentication
-          example: example_value
     InternalServerException:
       type: object
       properties:
         Message:
           type: string
           description: A description of the internal server error
-          example: example_value
-    BatchExecuteStatementResponse:
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          description: The identifier of the batch SQL statement
-          example: abc123
-        CreatedAt:
-          type: string
-          format: date-time
-          description: The date and time the batch statement was created
-          example: '2026-01-15T10:30:00Z'
-        Database:
-          type: string
-          description: The name of the database
-          example: example_value
-        DbUser:
-          type: string
-          description: The database user
-          example: example_value
-        ClusterIdentifier:
-          type: string
-          description: The cluster identifier
-          example: example_value
-        WorkgroupName:
-          type: string
-          description: The serverless workgroup name
-          example: example_value
-        SecretArn:
-          type: string
-          description: The secret ARN used for authentication
           example: example_value
     ExecuteStatementRequest:
       type: object
@@ -238,19 +172,38 @@ components:
           type: string
           description: A unique, case-sensitive identifier to ensure idempotency of the request.
           example: example_value
-    ActiveStatementsExceededException:
+    ExecuteStatementResponse:
       type: object
       properties:
-        Message:
+        Id:
           type: string
-          description: A description indicating the maximum number of active statements has been exceeded
+          format: uuid
+          description: The identifier of the SQL statement
+          example: abc123
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the statement was created
+          example: '2026-01-15T10:30:00Z'
+        Database:
+          type: string
+          description: The name of the database
           example: example_value
-    ValidationException:
-      type: object
-      properties:
-        Message:
+        DbUser:
           type: string
-          description: A description of the validation error
+          description: The database user
+          example: example_value
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SecretArn:
+          type: string
+          description: The secret ARN used for authentication
           example: example_value
     BatchExecuteStatementRequest:
       type: object
@@ -298,6 +251,53 @@ components:
         ClientToken:
           type: string
           description: Idempotency token
+          example: example_value
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description of the validation error
+          example: example_value
+    BatchExecuteStatementResponse:
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The identifier of the batch SQL statement
+          example: abc123
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the batch statement was created
+          example: '2026-01-15T10:30:00Z'
+        Database:
+          type: string
+          description: The name of the database
+          example: example_value
+        DbUser:
+          type: string
+          description: The database user
+          example: example_value
+        ClusterIdentifier:
+          type: string
+          description: The cluster identifier
+          example: example_value
+        WorkgroupName:
+          type: string
+          description: The serverless workgroup name
+          example: example_value
+        SecretArn:
+          type: string
+          description: The secret ARN used for authentication
+          example: example_value
+    ActiveStatementsExceededException:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: A description indicating the maximum number of active statements has been exceeded
           example: example_value
     SqlParameter:
       type: object
