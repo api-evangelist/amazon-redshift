@@ -295,6 +295,8 @@ apis:
   - type: Documentation
     url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
 common:
+- type: Plans
+  url: plans/amazon-redshift-plans-pricing.yml
 - type: Website
   url: https://aws.amazon.com/redshift/
 - type: PostmanWorkspace
