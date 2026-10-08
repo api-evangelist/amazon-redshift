@@ -295,6 +295,10 @@ apis:
   - type: Documentation
     url: https://docs.aws.amazon.com/redshift-data/latest/APIReference/Welcome.html
 common:
+- type: RateLimits
+  url: rate-limits/amazon-redshift-rate-limits.yml
+- type: FinOps
+  url: finops/amazon-redshift-finops.yml
 - type: Plans
   url: plans/amazon-redshift-plans-pricing.yml
 - type: Website
