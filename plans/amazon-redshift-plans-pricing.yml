@@ -1,132 +1,198 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Amazon Redshift
-providerId: amazon-redshift
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Amazon
-  - AWS
-  - Data Warehouse
-  - Analytics
-  - SQL
-description: Amazon Redshift offers two compute models. Redshift Serverless bills per RPU-hour ($0.375
-  in us-east-1, with a base capacity floor) plus separately metered managed storage. Redshift Provisioned
-  bills per node-hour for RA3 (current generation) instances plus managed storage. Reserved Instances,
-  Savings Plans, and a 90-day Serverless free trial credit are available. Concurrency Scaling earns up
-  to 1 free hour per cluster per day on Provisioned. Prices listed are us-east-1.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://aws.amazon.com/redshift/pricing/
 sources:
-  - https://aws.amazon.com/redshift/pricing/
+- https://aws.amazon.com/redshift/pricing/
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+published: true
+note: Most region-specific node prices are rendered via dynamic tokens and not visible; captured prices
+  stated in prose and examples. Reserved Instances and Serverless Reservations described with discount
+  percentages (up to 45% for 3-year, up to 24% for 1-year) but no numeric table prices visible.
+plan_count: 11
+currency: USD
 plans:
-  - id: amazon-redshift-serverless
-    name: Redshift Serverless
-    type: usage-based
-    description: Auto-scaling capacity measured in RPU-hours, per-second billing with a 60-second minimum.
-      Begins at $1.50/hour minimum (8 RPU base capacity).
-    entries:
-      - label: RPU-hour
-        name: rpu_hour
-        type: metered
-        metric: rpu-hour
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: '0.375'
-        userMultiplied: false
-      - label: Managed storage
-        name: managed_storage_serverless
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: '0.024'
-        userMultiplied: false
-      - label: Free trial credit
-        name: free_trial
-        type: quota
-        metric: usd
-        limit: 300
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Per-second billing, 60-second minimum
-      - name: Concurrency Scaling included
-      - name: $300 trial credit, 90-day expiry
-      - name: Auto-scaling base capacity
-  - id: amazon-redshift-provisioned-on-demand
-    name: Redshift Provisioned - On-Demand
-    type: usage-based
-    description: Per-node-hour pricing on RA3 instances. Starts at $0.543/hour for the smallest current-generation
-      node.
-    entries:
-      - label: RA3 node hour (entry rate)
-        name: ra3_node_hour
-        type: metered
-        metric: node-hour
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: '0.543'
-        userMultiplied: false
-      - label: Redshift Managed Storage
-        name: managed_storage_provisioned
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: '0.024'
-        userMultiplied: false
-      - label: Concurrency Scaling overage
-        name: cs_overage
-        type: metered
-        metric: cs-second
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-    elements:
-      - name: Up to 1 free hour of Concurrency Scaling per day per cluster
-      - name: Pay-as-you-go node hours
-      - name: 2-month provisioned free trial for new accounts
-  - id: amazon-redshift-reserved-instances
-    name: Redshift Reserved Instances
-    type: subscription
-    description: 1- or 3-year commitments for RA3 nodes in exchange for discounted hourly rates.
-    entries:
-      - label: Reserved Instance commitment
-        name: reserved_instance
-        type: subscription
-        metric: node-year
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-    elements:
-      - name: Up to ~75% discount vs. on-demand
-      - name: 1- or 3-year commitment terms
-      - name: All-upfront, partial-upfront, no-upfront options
-maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
-    url: https://apievangelist.com
-  - name: Amazon Web Services
-    email: support@aws.amazon.com
-    url: https://aws.amazon.com
+- name: Redshift Provisioned (on-demand)
+  price_text: $0.543 per hour
+  price: 0.543
+  currency: USD
+  period: per-use
+  unit: hour
+  included_quota: Hourly billing per node, no commitments; pause/resume suspends billing
+- name: Redshift Serverless
+  price_text: $1.50 per hour
+  price: 1.5
+  currency: USD
+  period: per-use
+  unit: hour
+  included_quota: Billed in RPU-hours per second with 60-second minimum; concurrency scaling and Spectrum
+    included
+- name: Redshift Serverless RPU (US East N. Virginia example)
+  price_text: $0.375 per RPU-hour
+  price: 0.375
+  currency: USD
+  period: per-use
+  unit: RPU-hour
+- name: Redshift Managed Storage (US East N. Virginia example)
+  price_text: $0.024/GB-Month
+  price: 0.024
+  currency: USD
+  period: month
+  unit: GB
+- name: Redshift Spectrum (US East N. Virginia example)
+  price_text: $5/TB
+  price: 5
+  currency: USD
+  period: per-use
+  unit: TB scanned
+  included_quota: 10 MB minimum per query
+- name: Redshift ML CREATE MODEL - first 10M cells
+  price_text: $20 per million cells
+  price: 20
+  currency: USD
+  period: per-use
+  unit: million cells
+- name: Redshift ML CREATE MODEL - next 90M cells
+  price_text: $15 per million cells
+  price: 15
+  currency: USD
+  period: per-use
+  unit: million cells
+- name: Redshift ML CREATE MODEL - over 100M cells
+  price_text: $7 per million cells
+  price: 7
+  currency: USD
+  period: per-use
+  unit: million cells
+- name: Oracle Database@AWS zero-ETL data export (US East N. Virginia)
+  price_text: $0.04
+  price: 0.04
+  currency: USD
+  period: per-use
+  unit: per GB exported
+- name: Oracle Database@AWS zero-ETL CDC (US East N. Virginia)
+  price_text: $2.00
+  price: 2
+  currency: USD
+  period: per-use
+  unit: per GB CDC
+- name: Serverless free trial credit
+  price_text: $300 credit with a 90-day expiration
+  price: 300
+  currency: USD
+  period: one-time
+  unit: credit
+  included_quota: New Redshift Serverless users
+rate_limit_statements:
+- Each cluster earns up to one hour of free Concurrency Scaling credits per day
+- You can accumulate up to 30 hours of free Concurrency Scaling credits for each active cluster
+- You can adjust this capacity from 4 to 1024 RPUs
+- usage exceeds 750 hours per month
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units:
+  - compute
+  - credit
+  - data
+  plans:
+  - name: Redshift Provisioned (on-demand)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Redshift Serverless
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Redshift Serverless RPU (US East N. Virginia example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Redshift Managed Storage (US East N. Virginia example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - month
+  - name: Redshift Spectrum (US East N. Virginia example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Redshift ML CREATE MODEL - first 10M cells
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Redshift ML CREATE MODEL - next 90M cells
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Redshift ML CREATE MODEL - over 100M cells
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Oracle Database@AWS zero-ETL data export (US East N. Virginia)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Oracle Database@AWS zero-ETL CDC (US East N. Virginia)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Serverless free trial credit
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - one-time
