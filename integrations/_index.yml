@@ -89,7 +89,7 @@
       type: destination
       lapsed: false
       cloud: true
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: amazon-redshift-fivetran
   label: Fivetran
@@ -115,7 +115,7 @@
     - connectors/applications/redshift
     vendor_link: https://aws.amazon.com/redshift/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: amazon-redshift-meltano
   label: Meltano
@@ -152,5 +152,5 @@
     - bronze
     - silver
     builder: 'community (Meltano Hub variant maintainers: airbyte, datadotworld, monad-inc, ticketswap, transferwise)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
