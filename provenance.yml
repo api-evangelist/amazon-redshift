@@ -5,12 +5,21 @@ artifacts:
   agentic-access/amazon-redshift-agentic-access.yml:
     method: generated
     evidence: declared in the artifact
+  ai-preferences/amazon-redshift-ai-preferences.yml:
+    method: harvested
+    evidence: declared in the artifact
   authentication/amazon-redshift-authentication.yml:
     method: derived
     evidence: declared in the artifact
   capabilities/amazon-redshift-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
+  cli/amazon-redshift-cli.yml:
+    method: searched
+    evidence: declared in the artifact
   collections/amazon-redshift-data-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -41,6 +50,24 @@ artifacts:
   collections/amazon-redshift-statement-management-api.postman_collection.json:
     method: derived
     evidence: openapi/amazon-redshift-statement-management-api
+  compliance/amazon-redshift-compliance.yml:
+    method: harvested
+    evidence: declared in the artifact
+  conformance/amazon-redshift-conformance.yml:
+    method: derived
+    evidence: declared in the artifact
+  conventions/amazon-redshift-conventions.yml:
+    method: derived
+    evidence: declared in the artifact
+  data-model/amazon-redshift-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  eligibility/amazon-redshift-eligibility.yml:
+    method: harvested
+    evidence: declared in the artifact
+  errors/amazon-redshift-problem-types.yml:
+    method: derived
+    evidence: declared in the artifact
   examples/amazon-redshift-data-active-statements-exceeded-exception-example.json:
     method: unknown
     evidence: no authorship recorded
@@ -137,19 +164,169 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/amazon-redshift-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
   integrations/amazon-redshift-integration-edges.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: searched
+    evidence: declared in the artifact
   json-ld/amazon-redshift-context.jsonld:
     method: unknown
     evidence: no authorship recorded
   json-ld/amazon-redshift-data-context.jsonld:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-redshift-batch-execute-statement-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-batch-execute-statement-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-batch-modify-cluster-snapshots-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-cancel-statement-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-cancel-statement-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-cluster-parameter-group-name-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-cluster-parameter-groups-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-redshift-cluster-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-cluster-security-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-cluster-subnet-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-clusters-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-authentication-profile-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-authentication-profile-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-cluster-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-cluster-parameter-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-cluster-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-cluster-security-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-cluster-security-group-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-cluster-snapshot-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-cluster-subnet-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-cluster-subnet-group-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-custom-domain-association-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-custom-domain-association-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-endpoint-access-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-endpoint-access-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-event-subscription-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-event-subscription-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-hsm-client-certificate-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-hsm-client-certificate-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-hsm-configuration-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-hsm-configuration-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-integration-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-namespace-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-qev2-idc-application-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-qev2-idc-application-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-redshift-idc-application-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-redshift-idc-application-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-reservation-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-scheduled-action-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-scheduled-action-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-snapshot-copy-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-snapshot-copy-configuration-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-snapshot-copy-grant-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-snapshot-copy-grant-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-snapshot-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-snapshot-schedule-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-tags-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-usage-limit-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-usage-limit-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-create-workgroup-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-redshift-data-active-statements-exceeded-exception-schema.json:
@@ -240,6 +417,399 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-redshift-data-validation-exception-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-cluster-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-cluster-security-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-cluster-snapshot-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-cluster-subnet-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-event-subscription-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-hsm-client-certificate-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-hsm-configuration-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-integration-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-namespace-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-qev2-idc-application-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-redshift-idc-application-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-resource-policy-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-resource-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-snapshot-copy-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-snapshot-copy-grant-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-snapshot-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-snapshot-schedule-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-delete-tags-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-deregister-namespace-input-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-authentication-profiles-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-authentication-profiles-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-cluster-parameter-groups-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-cluster-security-groups-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-cluster-snapshots-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-cluster-subnet-groups-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-clusters-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-data-shares-for-producer-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-endpoint-access-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-event-subscriptions-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-events-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-hsm-client-certificates-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-hsm-configurations-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-integrations-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-node-configuration-options-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-partners-input-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-partners-output-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-qev2-idc-applications-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-qev2-idc-applications-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-redshift-idc-applications-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-redshift-idc-applications-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-scheduled-actions-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-snapshot-copy-grants-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-snapshot-schedules-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-snapshot-schedules-output-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-statement-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-statement-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-table-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-table-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-table-restore-status-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-tags-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-describe-usage-limits-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-endpoint-access-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-endpoint-authorization-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-event-subscriptions-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-execute-statement-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-execute-statement-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-cluster-credentials-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-custom-domain-association-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-reservation-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-resource-policy-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-resource-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-snapshot-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-statement-result-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-statement-result-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-table-restore-status-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-get-table-restore-status-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-hsm-client-certificate-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-hsm-configuration-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-integration-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-integrations-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-custom-domain-associations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-databases-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-endpoint-access-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-namespaces-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-namespaces-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-reservations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-reservations-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-schemas-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-sessions-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-snapshot-copy-configurations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-snapshot-copy-configurations-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-snapshots-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-snapshots-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-statements-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-statements-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-table-restore-status-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-table-restore-status-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-tables-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-tables-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-tags-for-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-tags-for-resource-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-list-usage-limits-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-authentication-profile-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-authentication-profile-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-cluster-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-cluster-parameter-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-cluster-snapshot-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-cluster-subnet-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-custom-domain-association-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-custom-domain-association-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-event-subscription-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-integration-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-qev2-idc-application-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-redshift-idc-application-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-scheduled-action-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-modify-snapshot-schedule-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-partner-integration-input-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-partner-integration-output-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-put-resource-policy-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-put-resource-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-reset-cluster-parameter-group-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-resize-progress-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-restore-from-cluster-snapshot-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-restore-table-from-cluster-snapshot-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-restore-table-from-cluster-snapshot-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-restore-table-from-recovery-point-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-restore-table-from-recovery-point-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-restore-table-from-snapshot-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-restore-table-from-snapshot-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-scheduled-action-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-snapshot-copy-grant-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-snapshot-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-snapshot-schedule-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-table-restore-status-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-tagged-resource-list-message-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-update-namespace-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-update-scheduled-action-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-update-snapshot-copy-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-update-snapshot-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-usage-limit-list-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-redshift-usage-limit-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-structure/amazon-redshift-data-active-statements-exceeded-exception-structure.json:
@@ -335,7 +905,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -404,29 +974,126 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  openapi/_original/amazon-redshift-data-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/aws-redshift-amazon-redshift-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/amazon-redshift-amazon-redshift-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  llms/amazon-redshift-llms-provenance.yml:
+    method: unknown
+    evidence: no authorship recorded
+  llms/amazon-redshift-llms.txt:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/amazon-redshift-mcp.yml:
+    method: searched
+    evidence: declared in the artifact
+  openapi/amazon-redshift-authentication-profile-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-cluster-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-cluster-parameter-group-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-cluster-security-group-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-cluster-snapshot-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-cluster-subnet-group-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-custom-domain-association-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-data-share-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-endpoint-access-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-event-subscription-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-hsm-client-certificate-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-hsm-configuration-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-integration-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-redshift-metadata-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-namespace-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-operations-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-partner-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-qev2-idc-application-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-redshift-idc-application-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-reservation-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-resource-policy-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-redshift-result-retrieval-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-scheduled-action-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-snapshot-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-snapshot-copy-configuration-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-snapshot-copy-grant-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-snapshot-schedule-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-redshift-statement-execution-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-redshift-statement-management-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-table-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-table-restore-status-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-tag-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-usage-limit-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-redshift-workgroup-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  packages/amazon-redshift-packages.yml:
+    method: searched
+    evidence: declared in the artifact
+  patterns/amazon-redshift-patterns.yml:
     method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    evidence: declared in the artifact
   plans/amazon-redshift-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -448,6 +1115,9 @@ artifacts:
   rules/amazon-redshift-jsonschema-spectral-rules.yml:
     method: generated
     evidence: declared in the artifact
+  rules/amazon-redshift-rules.yml:
+    method: generated
+    evidence: declared in the artifact
   rules/amazon-redshift-spectral-rules.yml:
     method: generated
     evidence: declared in the artifact
@@ -464,8 +1134,35 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   smithy/redshift-2012-12-01.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/redshift/service/2012-12-01/redshift-2012-12-01.json
+      (sha256 aeabcfbb9f6f, fetched 2026-11-11T21:14:26+00:00)
+  smithy/redshift-data-2019-12-20.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/redshift-data/service/2019-12-20/redshift-data-2019-12-20.json
+      (sha256 824ed3bdf60b, fetched 2026-11-11T21:14:27+00:00)
+  smithy/redshift-serverless-2021-04-21.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/redshift-serverless/service/2021-04-21/redshift-serverless-2021-04-21.json
+      (sha256 74c00be3f5cb, fetched 2026-11-11T21:14:28+00:00)
+  terms/amazon-redshift-terms-of-service.yml:
+    method: harvested
+    evidence: declared in the artifact
+  vendors/amazon-redshift-vendors.yml:
     method: unknown
     evidence: no authorship recorded
   vocabulary/amazon-redshift-vocabulary.yaml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/amazon-redshift-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
+  well-known/amazon-redshift-midway-auth-openid-configuration.json:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-redshift-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-redshift-well-known.yml:
     method: unknown
     evidence: no authorship recorded
